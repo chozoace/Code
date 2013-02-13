@@ -33,7 +33,6 @@ namespace Spot
         //protected EnemyMeleeAttack theAttack;
 
         protected bool canLoop = true;
-        protected bool canUpdate = true;
 
         public MeleeEnemy(Vector2 newPos)
         {
@@ -41,20 +40,21 @@ namespace Spot
             position = newPos;
             //speed.X = 4;
             attackRange = 40;
-            health = 350;
+            health = 100;
             width = 64;
             height = 64;
             leftDetectionBox = new Rectangle((int)(position.X - 200), (int)(position.Y), 200, 64);
             facing = 1;
 
-            //idleAnim = "Enemy/burgeridleright";//flip
+            idleAnim = "Enemy/ToyBall_Idle_Right";//flip
             idleLeftAnim = "Enemy/ToyBall_Idle";
-            runAnim = "Enemy/burgerrunright";
+            runAnim = "Enemy/ToyBall_Walk_Right";
             runLeftAnim = "Enemy/ToyBall_Walk";
             //attackAnim = "Enemy/burgerpunchright";
             //attackLeftAnim = "Enemy/burgerpunchleft";
             hurtLeft = "Enemy/ToyBall_Hurt";
-            //hurtRight = "Enemy/burgerhurtright";
+            hurtRight = "Enemy/ToyBall_Hurt_Right";
+            deathRight = "Enemy/ToyBall_Death_Right";
             deathLeft = "Enemy/ToyBall_Death";
 
             LoadContent();
@@ -67,7 +67,7 @@ namespace Spot
 
         public override void Update()
         {
-            if (canUpdate)
+            if (canUpdate && enemyState != EnemyState.Dead)
             {
                 UpdateLife();
                 UpdateMovement();
@@ -115,23 +115,23 @@ namespace Spot
             
         }
 
-        public override void UpdateAnimation(object sender, ElapsedEventArgs e)
-        {
-            currentFrame = animationRect.X / 32 ;
-            totalFrames = (texture.Width / 32) - 1;
+        //public override void UpdateAnimation(object sender, ElapsedEventArgs e)
+        //{
+        //    currentFrame = animationRect.X / 32 ;
+        //    totalFrames = (texture.Width / 32) - 1;
 
-            if (currentFrame >= totalFrames)
-            {
-                //startover
-                //currentFrame = 0;
-                animationRect = new Rectangle(0, 0, width, height);
-            }
-            else
-            {
-                //continue
-                animationRect = new Rectangle((currentFrame + 1) * 32, 0, width, height);
-            }
-        }
+        //    if (currentFrame >= totalFrames)
+        //    {
+        //        //startover
+        //        //currentFrame = 0;
+        //        animationRect = new Rectangle(0, 0, width, height);
+        //    }
+        //    else
+        //    {
+        //        //continue
+        //        animationRect = new Rectangle((currentFrame + 1) * 32, 0, width, height);
+        //    }
+        //}
 
         public virtual void UpdateMovement()
         {
@@ -275,8 +275,8 @@ namespace Spot
             {
                 if (facing == 0 && currentAnimation != runAnim)
                 {
-                    //animationRect = new Rectangle(0, 0, width, height);
-                    //texture = myContent.Load<Texture2D>(runAnim);
+                    animationRect = new Rectangle(0, 0, width, height);
+                    texture = myContent.Load<Texture2D>(runAnim);
                     currentAnimation = runAnim;
 
                 }
@@ -291,8 +291,8 @@ namespace Spot
             {
                 if (facing == 0 && currentAnimation != idleAnim)
                 {
-                    //animationRect = new Rectangle(0, 0, width, height);
-                    //texture = myContent.Load<Texture2D>(idleAnim);
+                    animationRect = new Rectangle(0, 0, width, height);
+                    texture = myContent.Load<Texture2D>(idleAnim);
                     currentAnimation = idleAnim;
                 }
                 else if (facing == 1 && currentAnimation != idleLeftAnim)
@@ -306,8 +306,8 @@ namespace Spot
             {
                 if (facing == 0 && currentAnimation != hurtRight)
                 {
-                    //animationRect = new Rectangle(0, 0, width, height);
-                    //texture = myContent.Load<Texture2D>(hurtRight);
+                    animationRect = new Rectangle(0, 0, width, height);
+                    texture = myContent.Load<Texture2D>(hurtRight);
                     currentAnimation = hurtRight;
                 }
                 else if (facing == 1 && currentAnimation != hurtLeft)
@@ -436,22 +436,7 @@ namespace Spot
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
         {
             //drawCollisionBox(spriteBatch, myContent, camera);
-            if (currentAnimation == runAnim)
-            {
-                spriteBatch.Draw(myContent.Load<Texture2D>(runLeftAnim), position - camera, animationRect, Color.White, 0, Vector2.Zero, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-            }
-            else if (currentAnimation == hurtRight)
-            {
-                spriteBatch.Draw(myContent.Load<Texture2D>(hurtLeft), position - camera, animationRect, Color.White, 0, Vector2.Zero, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-            }
-            else if (currentAnimation == idleAnim)
-            {
-                spriteBatch.Draw(myContent.Load<Texture2D>(idleLeftAnim), position - camera, animationRect, Color.White, 0, Vector2.Zero, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-            }
-            else
-            {
-                base.Draw(spriteBatch, camera);
-            }
+            base.Draw(spriteBatch, camera);
         }
     }
 }

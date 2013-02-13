@@ -1,4 +1,3 @@
-
 <map version="1.0" orientation="orthogonal" width="50" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Bloack tileset" tilewidth="32" tileheight="32">
   <image source="../../../../../Currently Working On/Robo Platformer Project/Bloack tileset.png" width="64" height="64"/>

@@ -104,8 +104,6 @@ namespace Spot
                 {
                     if (hitBox.Intersects(enemy.BoundingBox) && canDamage/* && !enemy.hitstun*/)
                     {
-                        //enemy.hitstun = true;//activate timer
-                        //enemy.startHitstun(stunTime);
                         onHitboxHit(enemy);
                     }
                 }

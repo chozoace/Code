@@ -124,11 +124,11 @@ namespace Spot
             {
                 if (player.BoundingBox.Y > camera.Y + 208)
                 {
-                    //camera.Y = player.BoundingBox.Y + 208;
+                    camera.Y = player.BoundingBox.Y + 208;
                 }
                 if (player.BoundingBox.Y < camera.Y + 208)
                 {
-                    //camera.Y = player.BoundingBox.Y - 208;
+                    camera.Y = player.BoundingBox.Y - 208;
                 }
                 if (player.BoundingBox.X > camera.X + 288)
                 {

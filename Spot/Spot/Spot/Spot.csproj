@@ -113,6 +113,7 @@
     <Compile Include="GameControllers\LevelManager.cs" />
     <Compile Include="Hitbox.cs" />
     <Compile Include="LevelConstructor.cs" />
+    <Compile Include="LevelObjects\CirclePuzzlePiece.cs" />
     <Compile Include="LightAttack.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MeleeEnemy.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameControllers\Game1.cs" />
+    <Compile Include="LevelObjects\PuzzlePickUp.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Wall.cs" />
   </ItemGroup>

@@ -166,38 +166,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enemy\ToyBall_Afterdeath.png">
-      <Name>ToyBall_Afterdeath</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Enemy\ToyBall_Attack.png">
-      <Name>ToyBall_Attack</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Enemy\ToyBall_Death.png">
-      <Name>ToyBall_Death</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Enemy\ToyBall_Hurt.png">
-      <Name>ToyBall_Hurt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Enemy\ToyBall_Idle.png">
-      <Name>ToyBall_Idle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Enemy\ToyBall_Walk.png">
-      <Name>ToyBall_Walk</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Backgrounds\Background2.png">
       <Name>Background2</Name>
       <Importer>TextureImporter</Importer>
@@ -248,6 +216,62 @@
       <Name>EpicSong</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enemy\ToyBall_Hurt.png">
+      <Name>ToyBall_Hurt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enemy\ToyBall_Afterdeath.png">
+      <Name>ToyBall_Afterdeath</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Attack.png">
+      <Name>ToyBall_Attack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Death.png">
+      <Name>ToyBall_Death</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Idle.png">
+      <Name>ToyBall_Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Walk.png">
+      <Name>ToyBall_Walk</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enemy\ToyBall_Death_Right.png">
+      <Name>ToyBall_Death_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Hurt_Right.png">
+      <Name>ToyBall_Hurt_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Idle_Right.png">
+      <Name>ToyBall_Idle_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Enemy\ToyBall_Walk_Right.png">
+      <Name>ToyBall_Walk_Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

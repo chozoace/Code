@@ -45,6 +45,9 @@ namespace Spot
         int damageToBeApplied;
         int stunTimeToBeApplied;
         bool assignGravity = true; //TEMPORARY
+        protected bool canUpdate = true;
+
+        PuzzlePickUp myPuzzle;
 
         public Enemy()
         {
@@ -75,12 +78,11 @@ namespace Spot
         {
             if (health <= 0)
             {
+                comboTime.Dispose();
                 enemyState = EnemyState.Dead;
-            }
-
-            if (enemyState == EnemyState.Dead)
-            {
-                death();
+                canUpdate = false;
+                currentEvent = new EventHandler(deathState);
+                //death();
             }
         }
 
@@ -161,10 +163,35 @@ namespace Spot
             }
         }
 
+        public void deathState(object sender, EventArgs e)
+        {
+            if (facing == 0 && currentAnimation != deathRight)
+            {
+                animationRect = new Rectangle(0, 0, width, height);
+                texture = Game1.Instance().Content.Load<Texture2D>(deathRight);
+                currentAnimation = deathRight;
+            }
+            if (facing == 1 && currentAnimation != deathLeft)
+            {
+                animationRect = new Rectangle(0, 0, width, height);
+                texture = Game1.Instance().Content.Load<Texture2D>(deathLeft);
+                currentAnimation = deathLeft;
+            }
+
+            if (currentFrame == totalFrames - 1)
+            {
+                currentEvent = new EventHandler(nothingState);
+                LevelManager.Instance().removefromSpriteList(this);
+                LevelManager.Instance().removefromEnemyList(this);
+
+                myPuzzle = new CirclePuzzlePiece(position);
+                LevelManager.Instance().addToSpriteList(myPuzzle);
+            }
+        }
+
         public void death()
         {
             //do some animation then timer in death
-
             LevelManager.Instance().removefromSpriteList(this);
             LevelManager.Instance().removefromEnemyList(this);
         }

@@ -61,6 +61,13 @@ namespace Spot
         public bool canAttack = true;
         bool canJpress = true;
         bool canKpress = true;
+        //////////
+        //Puzzle Check variables
+        //////////
+        int totalPieces;
+        int totalCircles;
+        int totalTriangle;
+        int totalSquare;
 
         String lightRight;
         String lightLeft;
@@ -636,7 +643,6 @@ namespace Spot
             myState = PlayerState.Idle;
             base.endHitstun(sender, e);
         }
-
 
     }
 }
