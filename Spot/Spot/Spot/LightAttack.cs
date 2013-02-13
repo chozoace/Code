@@ -46,7 +46,7 @@ namespace Spot
             width = 30;
             height = 10;
             texture = content.Load<Texture2D>("LevelObjects/Block2");
-            damage = 25;
+            damage = 100;
 
             //begin animation
 

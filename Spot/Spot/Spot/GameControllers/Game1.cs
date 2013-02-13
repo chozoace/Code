@@ -23,7 +23,8 @@ namespace Spot
         {
             Gameplay,
             MainMenu,
-            Pause
+            Pause,
+            Puzzle
         }
         public GameState gameState = GameState.MainMenu;//should be main menu
 
