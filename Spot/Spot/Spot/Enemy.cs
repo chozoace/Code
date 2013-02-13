@@ -28,7 +28,7 @@ namespace Spot
             Thrown
         }
 
-        public int detectionRange = 300;
+        public int detectionRange = 300;//tracking distance
         public int scoreAward;
         public EnemyState enemyState;
         protected ContentManager enemyContent = Game1.Instance().getContent();
