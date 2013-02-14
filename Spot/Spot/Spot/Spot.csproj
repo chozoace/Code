@@ -107,25 +107,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EffectController.cs" />
-    <Compile Include="EffectsComponent.cs" />
-    <Compile Include="Enemy.cs" />
+    <Compile Include="Effects\EffectController.cs" />
+    <Compile Include="Effects\EffectsComponent.cs" />
+    <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="GameControllers\LevelManager.cs" />
-    <Compile Include="Hitbox.cs" />
-    <Compile Include="LevelConstructor.cs" />
+    <Compile Include="Player\PuzzleCursor.cs" />
+    <Compile Include="PuzzlePanelObjects\PuzzlePanel.cs" />
+    <Compile Include="Hitboxes\Hitbox.cs" />
+    <Compile Include="GameControllers\LevelConstructor.cs" />
     <Compile Include="LevelObjects\CirclePuzzlePiece.cs" />
-    <Compile Include="LightAttack.cs" />
-    <Compile Include="MainMenu.cs" />
-    <Compile Include="MeleeEnemy.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MoveableObject.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PuzzlePanelObjects\PuzzlePanelObject.cs" />
+    <Compile Include="Hitboxes\LightAttack.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Enemy\MeleeEnemy.cs" />
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="SpriteObjects\MoveableObject.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GameControllers\Game1.cs" />
     <Compile Include="LevelObjects\PuzzlePickUp.cs" />
-    <Compile Include="Sprite.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="SpriteObjects\Sprite.cs" />
+    <Compile Include="LevelObjects\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

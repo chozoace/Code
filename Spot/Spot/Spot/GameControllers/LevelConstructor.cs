@@ -54,11 +54,11 @@ namespace Spot
         public void loadLevel(String level)
         {
             currentLevel = level;
-            XmlLoad(currentLevel);
+            XmlLoad(currentLevel, "level");
         }
 
         //begin XML here
-        public void XmlLoad(String level)
+        public void XmlLoad(String level, String levelType)
         {
             //map, tileset and layer, data, tile 
             xDoc = new XmlDocument();
@@ -70,19 +70,30 @@ namespace Spot
             tileWidth = int.Parse(mapData.Attributes.GetNamedItem("tilewidth").Value);
             tileHeight = int.Parse(mapData.Attributes.GetNamedItem("tileheight").Value);
 
-            //gidlist is single dimensional array
-            foreach (XmlNode xNode in mapData.FirstChild.NextSibling.FirstChild.ChildNodes)
+            if (levelType == "level")
             {
-                gidList.Add(int.Parse(xNode.Attributes.GetNamedItem("gid").Value));
+                foreach (XmlNode xNode in mapData.FirstChild.NextSibling.FirstChild.ChildNodes)
+                {
+                    gidList.Add(int.Parse(xNode.Attributes.GetNamedItem("gid").Value));
+                }
+                tileLoadLevel1();
             }
-
-            tileLoad();
+            else if (levelType == "puzzle")
+            {
+                gidList.Clear();
+                foreach (XmlNode xNode in mapData.FirstChild.NextSibling.FirstChild.ChildNodes)
+                {
+                    gidList.Add(int.Parse(xNode.Attributes.GetNamedItem("gid").Value));
+                }
+                tileLoadPuzzlePanel();
+            }
         }
 
-        public void tileLoad()
+        public void tileLoadLevel1()
         {
             Wall theWall;
             Enemy enemy;
+            Sprite theObject;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -108,9 +119,11 @@ namespace Spot
                             playerYpos = destY;
                             break;
                         case 4:
-                            enemy = new MeleeEnemy(new Vector2(destX, destY));
-                            LevelManager.Instance().addToEnemyList(enemy);
-                            LevelManager.Instance().addToSpriteList(enemy);
+                            theObject = new PuzzlePanelObject(new Vector2(destX, destY));
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            //enemy = new MeleeEnemy(new Vector2(destX, destY));
+                            //LevelManager.Instance().addToEnemyList(enemy);
+                            //LevelManager.Instance().addToSpriteList(enemy);
                             break;
                         //case 5:
                         //    enemy = new OnionEnemy(new Vector2(destX, destY));
@@ -127,6 +140,38 @@ namespace Spot
             }
             LevelManager.Instance().player = new Player(new Vector2(playerXpos, playerYpos));
             LevelManager.Instance().addToSpriteList(LevelManager.Instance().player);
+        }
+
+        public void tileLoadPuzzlePanel()
+        {
+            //Wall theWall;
+            //Enemy enemy;
+            Sprite theObject;
+
+            for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
+            {
+                for (int spriteForY = 0; spriteForY < mapHeight; spriteForY++)
+                {
+                    int destY = spriteForY * tileHeight;
+                    int destX = spriteforX * tileWidth;
+
+                    switch (getTileAt(spriteforX, spriteForY))
+                    {
+                        case 1:
+                            theObject = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 5);
+                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            break;
+                        case 7:
+                            theObject = new Wall(new Vector2(destX, destY), 180, 180, 4);
+                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            break;
+                        case 2:
+                            theObject = new Wall(new Vector2(destX, destY), 180, 180, 6);
+                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            break; 
+                    }
+                }
+            }
         }
 
         public int getTileAt(int x, int y)

@@ -43,7 +43,6 @@ namespace Spot
         //////////
         bool leftMove = false;
         bool rightMove = false;
-        bool upMove = false;
         float runningDecelRate;//5f
         //////////
         //Jump variables
@@ -52,7 +51,6 @@ namespace Spot
         int jumpSpeedLimit;//10
         int jumpSpeed;//-13
         int fallSpeed;//10
-        int wallJumpSpeed;//-8
         int doubleJumpSpeed;//-9
         int jumpCount;//0
         //////////
@@ -60,7 +58,7 @@ namespace Spot
         //////////
         public bool canAttack = true;
         bool canJpress = true;
-        bool canKpress = true;
+        public bool canKpress = true;
         //////////
         //Puzzle Check variables
         //////////
@@ -68,6 +66,8 @@ namespace Spot
         int totalCircles;
         int totalTriangle;
         int totalSquare;
+
+        public bool canStartPuzzle = false;
 
         String lightRight;
         String lightLeft;
@@ -300,6 +300,11 @@ namespace Spot
                     if (CheckCollision(BottomBox) && canAttack && canKpress)
                     {
                         //k button code
+                        if (canStartPuzzle)
+                        {
+                            LevelManager.Instance().startPuzzle();
+                            //controlsLocked = true;
+                        }
                     }
                 }
 

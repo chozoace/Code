@@ -21,12 +21,15 @@ namespace Spot
         public enum LevelState
         {
             Gameplay,
-            Restarting
+            Restarting,
+            Puzzle
         }
         public LevelState levelState = LevelState.Gameplay;
 
         public Player player = null;
-        LevelConstructor level;
+        public LevelConstructor level;
+        public PuzzlePanel panelOne;
+        string levelOne = "Content/XML/Prototype1.xml";
         bool clearLists = false;
         List<Wall> listWalls = new List<Wall>();
         List<Sprite> spriteList = new List<Sprite>();
@@ -57,6 +60,7 @@ namespace Spot
         public void Initialize()
         {
             level = new LevelConstructor();
+            panelOne = new PuzzlePanel();
 
             LoadContent();
             levelState = LevelState.Gameplay;
@@ -65,7 +69,8 @@ namespace Spot
 
         public void LoadContent()
         {
-            level.loadLevel("Content/XML/Prototype1.xml");
+            level.loadLevel(levelOne);
+            panelOne.loadPanelXML();
             listWalls = level.getWallList();
             player.LoadContent(lmContent);
         }
@@ -105,6 +110,10 @@ namespace Spot
                     sprite.Update();
                 }
                 UpdateCamera();
+            }
+            else if (levelState == LevelState.Puzzle)
+            {
+                panelOne.Update();
             }
             if (clearLists)//restarts level
             {
@@ -149,23 +158,30 @@ namespace Spot
 
         public void drawGame(SpriteBatch spriteBatch)
         {
-            background.Draw(spriteBatch, backgroundCamera);
-            background.Draw(spriteBatch, backgroundCamera + new Vector2(640, 0));
-            background.Draw(spriteBatch, backgroundCamera - new Vector2(640, 0));
-            foreach (Sprite sprite in spriteList)
+            if (levelState == LevelState.Gameplay)
             {
-                sprite.Draw(spriteBatch, camera);
+                background.Draw(spriteBatch, backgroundCamera);
+                background.Draw(spriteBatch, backgroundCamera + new Vector2(640, 0));
+                background.Draw(spriteBatch, backgroundCamera - new Vector2(640, 0));
+                foreach (Sprite sprite in spriteList)
+                {
+                    sprite.Draw(spriteBatch, camera);
+                }
+
+                //player.drawCollisionBox(spriteBatch, lmContent, camera);
+
+                foreach (Sprite addition in spritesToAdd)
+                    spriteList.Add(addition);
+                spritesToAdd.Clear();
+
+                foreach (Sprite removed in spritesToRemove)
+                    spriteList.Remove(removed);
+                spritesToRemove.Clear();
             }
-
-            //player.drawCollisionBox(spriteBatch, lmContent, camera);
-
-            foreach (Sprite addition in spritesToAdd)
-                spriteList.Add(addition);
-            spritesToAdd.Clear();
-
-            foreach (Sprite removed in spritesToRemove)
-                spriteList.Remove(removed);
-            spritesToRemove.Clear();
+            else if (levelState == LevelState.Puzzle)
+            {
+                panelOne.drawPanel(spriteBatch, camera);
+            }
         }
 
         public void restartLevel()
@@ -181,6 +197,13 @@ namespace Spot
         public void createPauseMenu()
         {
 
+        }
+
+        public void startPuzzle()
+        {
+            levelState = LevelState.Puzzle;
+            panelOne.cursor.canKpress = false;
+            //level.XmlLoad(puzzlePanelLevelOne, "puzzle");
         }
     }
 }

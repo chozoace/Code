@@ -58,7 +58,15 @@ namespace Spot
                         break;
 
                     case 4:
-                        texture = content.Load<Texture2D>("LevelObjects/DeathBlock");
+                        texture = content.Load<Texture2D>("LevelObjects/SquareHole");
+                        break;
+
+                    case 5:
+                        texture = content.Load<Texture2D>("LevelObjects/TestPuzzleBlock");
+                        break;
+
+                    case 6:
+                        texture = content.Load<Texture2D>("LevelObjects/CircleHole");
                         break;
                 }
                 base.Draw(spriteBatch, camera);
