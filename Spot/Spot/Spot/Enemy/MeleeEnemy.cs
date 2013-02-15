@@ -115,24 +115,6 @@ namespace Spot
             
         }
 
-        //public override void UpdateAnimation(object sender, ElapsedEventArgs e)
-        //{
-        //    currentFrame = animationRect.X / 32 ;
-        //    totalFrames = (texture.Width / 32) - 1;
-
-        //    if (currentFrame >= totalFrames)
-        //    {
-        //        //startover
-        //        //currentFrame = 0;
-        //        animationRect = new Rectangle(0, 0, width, height);
-        //    }
-        //    else
-        //    {
-        //        //continue
-        //        animationRect = new Rectangle((currentFrame + 1) * 32, 0, width, height);
-        //    }
-        //}
-
         public virtual void UpdateMovement()
         {
             //Debug.WriteLine(CheckCollision(BoundingBox));
