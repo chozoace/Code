@@ -21,10 +21,11 @@ namespace Spot
         protected int attackLength = 5; // total number of frames in attack
         protected int attackRange;
 
-        protected int fallspeed = 10;
-        protected int Xspeed = 4;
+        protected int fallspeed;
+        protected int Xspeed;
 
-        protected Timer attackCooldown = new Timer(1000);
+        protected Timer attackCooldown;
+        protected int attackSpeed;
         protected Timer activeTimer;
         public override Rectangle BoundingBox { get { return new Rectangle((int)position.X + 25, (int)position.Y + 25, width - 45, height - 25); } }
         public Rectangle AttackBox { get { return new Rectangle((int)position.X - 5, (int)position.Y + 10, width + 10, height - 10); } }
@@ -38,13 +39,18 @@ namespace Spot
         {
             scoreAward = 20;
             position = newPos;
-            //speed.X = 4;
+            Xspeed = 4;
+            fallspeed = 10;
             attackRange = 40;
+            attackSpeed = 1000;
             health = 100;
             width = 64;
             height = 64;
-            leftDetectionBox = new Rectangle((int)(position.X - 200), (int)(position.Y), 200, 64);
+            
+            leftDetectionBox = new Rectangle((int)(position.X - 200), (int)(position.Y), 200, 64);//never used
             facing = 1;
+
+            attackCooldown = new Timer(attackSpeed);
 
             idleAnim = "Enemy/ToyBall_Idle_Right";//flip
             idleLeftAnim = "Enemy/ToyBall_Idle";
