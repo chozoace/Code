@@ -108,6 +108,7 @@ namespace Spot
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1);
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
+                            Debug.WriteLine("XDest " + destX + "ydest" + destY) ;
                             break;
                         case 2:
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2);

@@ -50,6 +50,7 @@ namespace Spot
             lmSpriteBatch = spriteBatch;
             instance = this;
             Initialize();
+            
         }
 
         public static LevelManager Instance()

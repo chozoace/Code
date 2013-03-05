@@ -36,7 +36,7 @@ namespace Spot
 
         public void getContent()
         {
-            content = Game1.instance.getContent();
+            content = Game1.Instance().getContent();
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)

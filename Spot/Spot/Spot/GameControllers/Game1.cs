@@ -29,8 +29,8 @@ namespace Spot
 
         LevelManager levelManager;
         MainMenu mainMenu;
-        public static Game1 instance;
-        bool singletonEnforcer = false;
+        static Game1 instance;
+        //bool singletonEnforcer = false;
 
         public bool EffectsOn = false;
         public bool usingController;
