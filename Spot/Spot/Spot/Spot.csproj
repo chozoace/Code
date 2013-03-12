@@ -111,6 +111,7 @@
     <Compile Include="Effects\EffectsComponent.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="GameControllers\LevelManager.cs" />
+    <Compile Include="LevelObjects\OpenPuzzleSlot.cs" />
     <Compile Include="Player\PuzzleCursor.cs" />
     <Compile Include="PuzzlePanelObjects\PuzzlePanel.cs" />
     <Compile Include="Hitboxes\Hitbox.cs" />

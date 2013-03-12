@@ -17,18 +17,32 @@ namespace Spot
     {
         string puzzlePanelLevelOne = "Content/XML/PuzzleTestScreen.xml";
         List<Sprite> spriteList = new List<Sprite>();
+        public List<OpenPuzzleSlot> holeList = new List<OpenPuzzleSlot>();
         KeyboardState myKeyState, previousKeyState;
         public PuzzleCursor cursor;
+        static PuzzlePanel instance;
+        int[,] puzzleSlots = new int[3, 3];
         
         public PuzzlePanel()
         {
             cursor = new PuzzleCursor(new Vector2(100,100));
+            instance = this;
+        }
+
+        public static PuzzlePanel Instance()
+        {
+            return instance;
         }
 
         public void loadPanelXML()
         {
             LevelManager.Instance().level.XmlLoad(puzzlePanelLevelOne, "puzzle");
             addToSpriteList(cursor);
+        }
+
+        public void addToHoleList(OpenPuzzleSlot sprite)
+        {
+            holeList.Add(sprite);
         }
 
         public void addToSpriteList(Sprite sprite)

@@ -108,7 +108,6 @@ namespace Spot
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1);
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
-                            Debug.WriteLine("XDest " + destX + "ydest" + destY) ;
                             break;
                         case 2:
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2);
@@ -148,6 +147,9 @@ namespace Spot
             //Wall theWall;
             //Enemy enemy;
             Sprite theObject;
+            OpenPuzzleSlot slot;
+            int slotRow = 0;
+            int slotColumn = 0;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -163,11 +165,18 @@ namespace Spot
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break;
                         case 7:
-                            theObject = new Wall(new Vector2(destX, destY), 180, 180, 4);
-                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            slot = new OpenPuzzleSlot(new Vector2(destX, destY), 180, 180, false, slotRow, slotColumn);
+                            slotRow++;
+                            if (slotRow > 2)
+                            {
+                                slotRow = 0;
+                                slotColumn++;
+                            }
+                            LevelManager.Instance().panelOne.addToSpriteList(slot);
+                            LevelManager.Instance().panelOne.addToHoleList(slot);
                             break;
-                        case 2:
-                            theObject = new Wall(new Vector2(destX, destY), 180, 180, 6);
+                        case 25:
+                            theObject = new Wall(new Vector2(destX, destY), 32, 32, 6);
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break; 
                     }

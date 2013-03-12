@@ -19,7 +19,7 @@ namespace Spot
         bool isVisible = true;
         ContentManager content;
         public int imageId;
-        public Rectangle BoundingBox { get { return boundingBox; } }//this is needed for collision
+        public override Rectangle BoundingBox { get { return boundingBox; } }//this is needed for collision
         public int Width { get { return width; } }
         public int Height { get { return height; } }
 
@@ -29,14 +29,9 @@ namespace Spot
             position = Position;
             width = theWidth;
             height = theHeight;
-            getContent();
+            content = Game1.Instance().getContent();
             imageId = id;
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
-        }
-
-        public void getContent()
-        {
-            content = Game1.Instance().getContent();
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
@@ -66,7 +61,7 @@ namespace Spot
                         break;
 
                     case 6:
-                        texture = content.Load<Texture2D>("LevelObjects/CircleHole");
+                        texture = content.Load<Texture2D>("LevelObjects/NumOne");
                         break;
                 }
                 base.Draw(spriteBatch, camera);

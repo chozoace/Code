@@ -20,9 +20,13 @@ namespace Spot
         String currentTexture;
         String block1 = "LevelObjects/Block1";
         String block2 = "LevelObjects/Block2";
+        int currentPiece = 1;
         bool canTexChange = true;
         public bool canKpress = false;
+        bool canJpress = true;
         Vector2 speed;
+        List<OpenPuzzleSlot> holeList;
+        OpenPuzzleSlot currentSlot;
 
         public PuzzleCursor(Vector2 newPos)
         {
@@ -33,6 +37,7 @@ namespace Spot
             height = 32;
             speed.X = 6;
             speed.Y = 6;
+            
         }
 
         public override void Update()
@@ -79,11 +84,13 @@ namespace Spot
                 {
                     texture = Game1.Instance().Content.Load<Texture2D>(block2);
                     currentTexture = block2;
+                    currentPiece = 2;
                     Debug.WriteLine("here");
                 }
                 else if (currentTexture == block2)
                 {
                     texture = Game1.Instance().Content.Load<Texture2D>(block1);
+                    currentPiece = 1;
                     currentTexture = block1;
                     Debug.WriteLine("or here");
                 }
@@ -91,8 +98,29 @@ namespace Spot
             }
             if (keyState.IsKeyDown(Keys.J) == true && previousKeyState.IsKeyDown(Keys.J) == true && canTexChange)
             {
-                
+                if (canJpress)
+                {
+                    if (CheckCollision(BoundingBox))
+                    {
+                        currentSlot.interact(currentPiece);
+                        canJpress = false;
+                    }
+                }
             }
+        }
+
+        public override bool CheckCollision(Rectangle collisionBox)
+        {
+            holeList = PuzzlePanel.Instance().holeList;
+            foreach (OpenPuzzleSlot hole in holeList)
+            {
+                if(collisionBox.Intersects(hole.BoundingBox))
+                {
+                    currentSlot = hole;
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void CheckKeysUp(KeyboardState keyState)
@@ -125,7 +153,7 @@ namespace Spot
             }
             if (keyState.IsKeyUp(Keys.J) == true && previousKeyState.IsKeyUp(Keys.J) == true)
             {
-                
+                canJpress = true;
             }
         }
 
