@@ -164,8 +164,8 @@ namespace Spot
                             theObject = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 5);
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break;
-                        case 7:
-                            slot = new OpenPuzzleSlot(new Vector2(destX, destY), 180, 180, false, slotRow, slotColumn);
+                        case 18:
+                            slot = new OpenPuzzleSlot(new Vector2(destX, destY), 160, 128, false, slotRow, slotColumn);
                             slotRow++;
                             if (slotRow > 2)
                             {

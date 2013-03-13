@@ -20,6 +20,7 @@ namespace Spot
         String currentTexture;
         String block1 = "LevelObjects/Block1";
         String block2 = "LevelObjects/Block2";
+        String block3 = "LevelObjects/Block3";
         int currentPiece = 1;
         bool canTexChange = true;
         public bool canKpress = false;
@@ -27,6 +28,7 @@ namespace Spot
         Vector2 speed;
         List<OpenPuzzleSlot> holeList;
         OpenPuzzleSlot currentSlot;
+        public bool controlsLocked = false;
 
         public PuzzleCursor(Vector2 newPos)
         {
@@ -37,7 +39,6 @@ namespace Spot
             height = 32;
             speed.X = 6;
             speed.Y = 6;
-            
         }
 
         public override void Update()
@@ -54,56 +55,63 @@ namespace Spot
 
         public void CheckKeysDown(KeyboardState keyState)
         {
-            if (keyState.IsKeyDown(Keys.A) == true && previousKeyState.IsKeyDown(Keys.A) == true)
+            if (!controlsLocked)
             {
-                leftMove = true;
-            }
-            if (keyState.IsKeyDown(Keys.D) == true && previousKeyState.IsKeyDown(Keys.D) == true)
-            {
-                rightMove = true;   
-            }
-            if (keyState.IsKeyDown(Keys.W) == true && previousKeyState.IsKeyDown(Keys.W) == true)
-            {
-                upMove = true;
-            }
-            if (keyState.IsKeyDown(Keys.S) == true && previousKeyState.IsKeyDown(Keys.S) == true)
-            {
-                downMove = true;
-            }
-            if (keyState.IsKeyDown(Keys.K) == true && previousKeyState.IsKeyDown(Keys.K) == true)
-            {
-                if (canKpress)
+                if (keyState.IsKeyDown(Keys.A) == true && previousKeyState.IsKeyDown(Keys.A) == true)
                 {
-                    LevelManager.Instance().player.canKpress = false;
-                    LevelManager.Instance().levelState = LevelManager.LevelState.Gameplay;
+                    leftMove = true;
                 }
-            }
-            if (keyState.IsKeyDown(Keys.U) == true && previousKeyState.IsKeyDown(Keys.U) == true && canTexChange)
-            {
-                if (currentTexture == block1)
+                if (keyState.IsKeyDown(Keys.D) == true && previousKeyState.IsKeyDown(Keys.D) == true)
                 {
-                    texture = Game1.Instance().Content.Load<Texture2D>(block2);
-                    currentTexture = block2;
-                    currentPiece = 2;
-                    Debug.WriteLine("here");
+                    rightMove = true;
                 }
-                else if (currentTexture == block2)
+                if (keyState.IsKeyDown(Keys.W) == true && previousKeyState.IsKeyDown(Keys.W) == true)
                 {
-                    texture = Game1.Instance().Content.Load<Texture2D>(block1);
-                    currentPiece = 1;
-                    currentTexture = block1;
-                    Debug.WriteLine("or here");
+                    upMove = true;
                 }
-                canTexChange = false;
-            }
-            if (keyState.IsKeyDown(Keys.J) == true && previousKeyState.IsKeyDown(Keys.J) == true && canTexChange)
-            {
-                if (canJpress)
+                if (keyState.IsKeyDown(Keys.S) == true && previousKeyState.IsKeyDown(Keys.S) == true)
                 {
-                    if (CheckCollision(BoundingBox))
+                    downMove = true;
+                }
+                if (keyState.IsKeyDown(Keys.K) == true && previousKeyState.IsKeyDown(Keys.K) == true)
+                {
+                    if (canKpress)
                     {
-                        currentSlot.interact(currentPiece);
-                        canJpress = false;
+                        LevelManager.Instance().player.canKpress = false;
+                        LevelManager.Instance().levelState = LevelManager.LevelState.Gameplay;
+                    }
+                }
+                if (keyState.IsKeyDown(Keys.U) == true && previousKeyState.IsKeyDown(Keys.U) == true && canTexChange)
+                {
+                    if (currentTexture == block1)
+                    {
+                        texture = Game1.Instance().Content.Load<Texture2D>(block2);
+                        currentTexture = block2;
+                        currentPiece = 2;
+                    }
+                    else if (currentTexture == block2)
+                    {
+                        texture = Game1.Instance().Content.Load<Texture2D>(block3);
+                        currentPiece = 3;
+                        currentTexture = block3;
+                    }
+                    else if (currentTexture == block3)
+                    {
+                        texture = Game1.Instance().Content.Load<Texture2D>(block1);
+                        currentPiece = 1;
+                        currentTexture = block1;
+                    }
+                    canTexChange = false;
+                }
+                if (keyState.IsKeyDown(Keys.J) == true && previousKeyState.IsKeyDown(Keys.J) == true && canTexChange)
+                {
+                    if (canJpress)
+                    {
+                        if (CheckCollision(BoundingBox))
+                        {
+                            currentSlot.interact(currentPiece);
+                            canJpress = false;
+                        }
                     }
                 }
             }

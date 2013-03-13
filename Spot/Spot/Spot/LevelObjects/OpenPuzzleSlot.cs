@@ -16,9 +16,14 @@ namespace Spot
     class OpenPuzzleSlot : Sprite
     {
         bool canInteract;
-        int points = 1;
+        public int points = 0;
         int row;
         int column;
+        bool occupied = false;
+        string emptyTex = "LevelObjects/SquareHole";
+        string circleTex = "LevelObjects/SquareHoleRed";
+        string triangleTex = "LevelObjects/SquareHoleBlue";
+        string squareTex = "LevelObjects/SquareHoleGreen";
 
 
         public OpenPuzzleSlot(Vector2 newPos, int theWidth, int theHeight, bool interactable, int myRow, int myColumn)
@@ -26,10 +31,11 @@ namespace Spot
             position = newPos;
             width = theWidth;
             height = theHeight;
-            texture = Game1.Instance().Content.Load<Texture2D>("LevelObjects/SquareHole");
+            texture = Game1.Instance().Content.Load<Texture2D>(emptyTex);
             canInteract = interactable;
             row = myRow;
             column = myColumn;
+            PuzzlePanel.Instance().puzzleSlots[row, column] = this;
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
@@ -41,11 +47,51 @@ namespace Spot
         {
             if (currentPiece == 1)
             {
-                Debug.WriteLine("square Interact " + row + " " + column);
+                if (!occupied)
+                {
+                    Debug.WriteLine("circle Interact " + row + " " + column);
+                    points = 1;
+                    occupied = true;
+                    texture = Game1.Instance().Content.Load<Texture2D>(circleTex);
+                }
+                else
+                {
+                    points = 0;
+                    occupied = false;
+                    texture = Game1.Instance().Content.Load<Texture2D>(emptyTex);
+                }
             }
             else if (currentPiece == 2)
             {
-                Debug.WriteLine("Triangle Interact");
+                if (!occupied)
+                {
+                    Debug.WriteLine("triangle Interact " + row + " " + column);
+                    points = 2;
+                    occupied = true;
+                    texture = Game1.Instance().Content.Load<Texture2D>(triangleTex);
+                }
+                else
+                {
+                    points = 0;
+                    occupied = false;
+                    texture = Game1.Instance().Content.Load<Texture2D>(emptyTex);
+                }
+            }
+            else if (currentPiece == 3)
+            {
+                if (!occupied)
+                {
+                    Debug.WriteLine("square Interact " + row + " " + column);
+                    points = 3;
+                    occupied = true;
+                    texture = Game1.Instance().Content.Load<Texture2D>(squareTex);
+                }
+                else
+                {
+                    points = 0;
+                    occupied = false;
+                    texture = Game1.Instance().Content.Load<Texture2D>(emptyTex);
+                }
             }
         }
     }
