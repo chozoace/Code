@@ -43,7 +43,6 @@ namespace Spot
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 480;
             graphics.PreferredBackBufferWidth = 640;
-
             effect = new EffectComponent(this);
             controlEffects = new EffectController();
             Components.Add(effect);

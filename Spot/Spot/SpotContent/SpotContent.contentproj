@@ -167,18 +167,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LevelObjects\bricktile.png">
-      <Name>bricktile</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="LevelObjects\woodtile.png">
-      <Name>woodtile</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="XML\Prototype1.xml">
       <Name>Prototype1</Name>
       <Importer>XmlImporter</Importer>
@@ -338,6 +326,27 @@
   <ItemGroup>
     <Compile Include="LevelObjects\AwesomeFace.png">
       <Name>AwesomeFace</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Backgrounds\newBack.jpg">
+      <Name>newBack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LevelObjects\woodtile.png">
+      <Name>woodtile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LevelObjects\bricktile.png">
+      <Name>bricktile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

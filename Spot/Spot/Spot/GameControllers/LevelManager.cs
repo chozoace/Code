@@ -41,7 +41,7 @@ namespace Spot
         bool paused = false;
         public static LevelManager instance;
 
-        Sprite background = new Sprite("Backgrounds/Background2");
+        Sprite background = new Sprite("Backgrounds/newBack");
         Vector2 backgroundCamera = new Vector2(0, 0);
 
         public LevelManager(ContentManager content, SpriteBatch spriteBatch)
