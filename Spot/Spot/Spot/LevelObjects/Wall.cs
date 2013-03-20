@@ -15,13 +15,17 @@ namespace Spot
 {
     class Wall : Sprite
     {
-        Rectangle boundingBox;
+        protected Rectangle boundingBox;
         bool isVisible = true;
-        ContentManager content;
+        protected ContentManager content;
         public int imageId;
         public override Rectangle BoundingBox { get { return boundingBox; } }//this is needed for collision
         public int Width { get { return width; } }
         public int Height { get { return height; } }
+
+        public Wall()
+        {
+        }
 
         public Wall(Vector2 Position, int theWidth, int theHeight, int id)
         {
@@ -33,6 +37,8 @@ namespace Spot
             imageId = id;
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
         }
+
+
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
         {
@@ -71,6 +77,11 @@ namespace Spot
         public virtual void interact()
         {
             
+        }
+
+        public virtual void activateTrigger()
+        {
+
         }
     }
 }

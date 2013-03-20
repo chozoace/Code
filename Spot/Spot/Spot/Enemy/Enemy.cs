@@ -47,7 +47,7 @@ namespace Spot
         bool assignGravity = true; //TEMPORARY
         protected bool canUpdate = true;
 
-        PuzzlePickUp myPuzzle;
+        protected PuzzlePickUp myPuzzle;
 
         public Enemy()
         {
@@ -63,8 +63,6 @@ namespace Spot
             animationRect = new Rectangle(0, 0, width, height);
             animTimer.Elapsed += new ElapsedEventHandler(UpdateAnimation);
             animTimer.Enabled = true;
-
-            Debug.WriteLine("currentanim " + currentAnimation + " animationrect " + animationRect);
 
             enemyState = EnemyState.Idle;
         }
@@ -163,7 +161,7 @@ namespace Spot
             }
         }
 
-        public void deathState(object sender, EventArgs e)
+        public virtual void deathState(object sender, EventArgs e)
         {
             if (facing == 0 && currentAnimation != deathRight)
             {
@@ -184,8 +182,22 @@ namespace Spot
                 LevelManager.Instance().removefromSpriteList(this);
                 LevelManager.Instance().removefromEnemyList(this);
 
-                myPuzzle = new CirclePuzzlePiece(position);
+                if(facing == 0)
+                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X - 50, position.Y));
+                else
+                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X + 50, position.Y));
                 LevelManager.Instance().addToSpriteList(myPuzzle);
+            }
+        }
+
+        public virtual void popInState(object sender, EventArgs e)
+        {
+            //speed.X = -6;
+            //speed.Y = -2;
+
+            if(CheckCollision(BoundingBox))
+            {
+                currentEvent = new EventHandler(nothingState);
             }
         }
 

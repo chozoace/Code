@@ -31,7 +31,7 @@ namespace Spot
         public Rectangle AttackBox { get { return new Rectangle((int)position.X - 5, (int)position.Y + 10, width + 10, height - 10); } }
         protected bool canAttack = true;
         protected bool canMove = false;
-        //protected EnemyMeleeAttack theAttack;
+        protected EnemyMeleeAttack theAttack;
 
         protected bool canLoop = true;
 
@@ -46,6 +46,7 @@ namespace Spot
             health = 100;
             width = 64;
             height = 64;
+            gravity = .5f;
             
             leftDetectionBox = new Rectangle((int)(position.X - 200), (int)(position.Y), 200, 64);//never used
             facing = 1;
@@ -56,8 +57,8 @@ namespace Spot
             idleLeftAnim = "Enemy/ToyBall_Idle";
             runAnim = "Enemy/ToyBall_Walk_Right";
             runLeftAnim = "Enemy/ToyBall_Walk";
-            //attackAnim = "Enemy/burgerpunchright";
-            //attackLeftAnim = "Enemy/burgerpunchleft";
+            attackAnim = "Enemy/burgerpunchright";
+            attackLeftAnim = "Enemy/burgerpunchleft";
             hurtLeft = "Enemy/ToyBall_Hurt";
             hurtRight = "Enemy/ToyBall_Hurt_Right";
             deathRight = "Enemy/ToyBall_Death_Right";
@@ -73,11 +74,11 @@ namespace Spot
 
         public override void Update()
         {
-            if (canUpdate && enemyState != EnemyState.Dead)
+            if (canUpdate && enemyState != EnemyState.Dead && currentEvent == nothingState)
             {
                 UpdateLife();
                 UpdateMovement();
-                UpdateGravity();
+                //UpdateGravity();
                 UpdateTexture();
 
                 if (enemyState != EnemyState.Hitstun)
@@ -117,6 +118,7 @@ namespace Spot
 
                 }
             }
+            UpdateGravity();
             base.Update();
             
         }
@@ -361,7 +363,7 @@ namespace Spot
                 //create hitbox
                 if (canAttack)
                 {
-                    //theAttack = new EnemyMeleeAttack((int)(position.X), (int)(position.Y), facing);
+                    theAttack = new EnemyMeleeAttack((int)(position.X), (int)(position.Y), facing);
                     activeTimer = new Timer(500);
                     activeTimer.Elapsed += new ElapsedEventHandler(removeAttack);
                     activeTimer.Enabled = true;
@@ -397,29 +399,63 @@ namespace Spot
 
         public void removeAttack(object sender, ElapsedEventArgs e)
         {
-            //theAttack = null;
+            theAttack = null;
             activeTimer.Dispose();
         }
 
         public bool CheckAttackRange()
         {
             Player player = LevelManager.Instance().player;
-            //if (facing == 1)
-            //{
-            //    if (position.X - (player.position.X) < attackRange)
-            //    {
-            //        return true;
-            //    }
-            //}
-            //else if (facing == 0)
-            //{
-            //    if (player.position.X - (position.X) < attackRange + 4)
-            //    {
-            //        return true;
-            //    }
-            //}
+            if (facing == 1)
+            {
+                if (position.X - (player.position.X) < attackRange)
+                {
+                    return true;
+                }
+            }
+            else if (facing == 0)
+            {
+                if (player.position.X - (position.X) < attackRange + 4)
+                {
+                    return true;
+                }
+            }
             return false;
         }
+
+        //public override void deathState(object sender, EventArgs e)
+        //{
+        //    Enemy enemy1;
+        //    Enemy enemy2;
+
+        //    if (facing == 0 && currentAnimation != deathRight)
+        //    {
+        //        animationRect = new Rectangle(0, 0, width, height);
+        //        texture = Game1.Instance().Content.Load<Texture2D>(deathRight);
+        //        currentAnimation = deathRight;
+        //    }
+        //    if (facing == 1 && currentAnimation != deathLeft)
+        //    {
+        //        animationRect = new Rectangle(0, 0, width, height);
+        //        texture = Game1.Instance().Content.Load<Texture2D>(deathLeft);
+        //        currentAnimation = deathLeft;
+        //    }
+
+        //    if (currentFrame == totalFrames - 1)
+        //    {
+        //        currentEvent = new EventHandler(nothingState);
+        //        LevelManager.Instance().removefromSpriteList(this);
+        //        LevelManager.Instance().removefromEnemyList(this);
+
+        //        splitting effect
+        //        enemy1 = new MeleeEnemy(position);
+        //        LevelManager.Instance().addToSpriteList(enemy1);
+        //        LevelManager.Instance().addToEnemyList(enemy1);
+        //        enemy2 = new MeleeEnemy(new Vector2(position.X + 70, position.Y));
+        //        LevelManager.Instance().addToSpriteList(enemy2);
+        //        LevelManager.Instance().addToEnemyList(enemy2);
+        //    }
+        //}
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
         {

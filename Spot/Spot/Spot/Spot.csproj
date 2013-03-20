@@ -111,7 +111,12 @@
     <Compile Include="Effects\EffectsComponent.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="GameControllers\LevelManager.cs" />
+    <Compile Include="Hitboxes\EnemyMeleeAttack.cs" />
+    <Compile Include="LevelObjects\BookCaseTrigger.cs" />
+    <Compile Include="LevelObjects\DeathBlock.cs" />
+    <Compile Include="LevelObjects\FallingBookCase.cs" />
     <Compile Include="LevelObjects\OpenPuzzleSlot.cs" />
+    <Compile Include="LevelObjects\PopUpEnemyTrigger.cs" />
     <Compile Include="Player\PuzzleCursor.cs" />
     <Compile Include="PuzzlePanelObjects\PuzzlePanel.cs" />
     <Compile Include="Hitboxes\Hitbox.cs" />

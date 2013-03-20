@@ -621,6 +621,7 @@ namespace Spot
             {
                 if (wall.BoundingBox.Intersects(collisionBox))
                 {
+                    wall.interact();
                     collidingWall = wall;
                     return true;
                 }

@@ -51,6 +51,11 @@ namespace Spot
             return walls;
         }
 
+        public void removefromWallList(Wall wall)
+        {
+            walls.Remove(wall);
+        }
+
         public void loadLevel(String level)
         {
             currentLevel = level;
@@ -125,16 +130,26 @@ namespace Spot
                             //LevelManager.Instance().addToEnemyList(enemy);
                             //LevelManager.Instance().addToSpriteList(enemy);
                             break;
-                        //case 5:
-                        //    enemy = new OnionEnemy(new Vector2(destX, destY));
-                        //    LevelManager.Instance().addToEnemyList(enemy);
-                        //    LevelManager.Instance().addToSpriteList(enemy);
-                        //    break;
-                        //case 6:
-                        //    enemy = new MeleeEnemy(new Vector2(destX, destY));
-                        //    LevelManager.Instance().addToEnemyList(enemy);
-                        //    LevelManager.Instance().addToSpriteList(enemy);
-                        //    break;
+                        case 5:
+                            theWall = new PopUpEnemyTrigger(new Vector2(destX, destY), tileWidth, tileHeight, 2);
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 6:
+                            theWall = new FallingBookCase(new Vector2(destX, destY));
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 7:
+                            theWall = new BookCaseTrigger(new Vector2(destX, destY), tileWidth, tileHeight, 2);
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 8:
+                            theWall = new DeathBlock(new Vector2(destX, destY), tileWidth, tileHeight, 2);
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
                     }
                 }
             }

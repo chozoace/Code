@@ -73,6 +73,7 @@ namespace Spot
 
         public virtual void startHitstun(int stunTime)
         {
+            hitstunTimer.Dispose();
             hitstunTimer = new Timer(stunTime);
             hitstunTimer.Elapsed += new ElapsedEventHandler(endHitstun);
             hitstunTimer.Enabled = true;
