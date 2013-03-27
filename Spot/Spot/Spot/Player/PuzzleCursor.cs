@@ -119,7 +119,7 @@ namespace Spot
 
         public override bool CheckCollision(Rectangle collisionBox)
         {
-            holeList = PuzzlePanel.Instance().holeList;
+            holeList = LevelManager.Instance().panelOne.holeList;
             foreach (OpenPuzzleSlot hole in holeList)
             {
                 if(collisionBox.Intersects(hole.BoundingBox))

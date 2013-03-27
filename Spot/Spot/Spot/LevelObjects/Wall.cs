@@ -16,9 +16,9 @@ namespace Spot
     class Wall : Sprite
     {
         protected Rectangle boundingBox;
-        bool isVisible = true;
         protected ContentManager content;
         public int imageId;
+        private bool textureLoaded = false;
         public override Rectangle BoundingBox { get { return boundingBox; } }//this is needed for collision
         public int Width { get { return width; } }
         public int Height { get { return height; } }
@@ -27,9 +27,10 @@ namespace Spot
         {
         }
 
-        public Wall(Vector2 Position, int theWidth, int theHeight, int id)
+        public Wall(Vector2 Position, int theWidth, int theHeight, int id, string myName)
         {
             // isVisible = Visible;
+            name = myName;
             position = Position;
             width = theWidth;
             height = theHeight;
@@ -38,38 +39,48 @@ namespace Spot
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
         }
 
-
+        public Wall(Vector2 Position, int theWidth, int theHeight, string tex, string myName)
+        {
+            name = myName;
+            position = Position;
+            width = theWidth;
+            height = theHeight;
+            content = Game1.Instance().getContent();
+            texture = content.Load<Texture2D>(tex);
+            boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
+        }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
         {
-            if (isVisible == true)
+            if (visible == true)
             {
-                switch (imageId)
-                {
-                    case 1:
-                        texture = content.Load<Texture2D>("LevelObjects/bricktile");
-                        break;
+                if(textureLoaded == false)
+                    switch (imageId)
+                    {
+                        case 1:
+                            texture = content.Load<Texture2D>("LevelObjects/bricktile");
+                            break;
 
-                    case 2:
-                        texture = content.Load<Texture2D>("LevelObjects/woodtile");
-                        break;
+                        case 2:
+                            texture = content.Load<Texture2D>("LevelObjects/woodtile");
+                            break;
 
-                    case 3:
-                        texture = content.Load<Texture2D>("LevelObjects/Block3");
-                        break;
+                        case 3:
+                            texture = content.Load<Texture2D>("LevelObjects/Block3");
+                            break;
 
-                    case 4:
-                        texture = content.Load<Texture2D>("LevelObjects/SquareHole");
-                        break;
+                        case 4:
+                            texture = content.Load<Texture2D>("LevelObjects/SquareHole");
+                            break;
 
-                    case 5:
-                        texture = content.Load<Texture2D>("LevelObjects/TestPuzzleBlock");
-                        break;
+                        case 5:
+                            texture = content.Load<Texture2D>("LevelObjects/TestPuzzleBlock");
+                            break;
 
-                    case 6:
-                        texture = content.Load<Texture2D>("LevelObjects/NumOne");
-                        break;
-                }
+                        case 6:
+                            texture = content.Load<Texture2D>("LevelObjects/NumOne");
+                            break;
+                    }
                 base.Draw(spriteBatch, camera);
             }
         }

@@ -19,7 +19,7 @@ namespace Spot
         bool active = true;
 
         public BookCaseTrigger(Vector2 Position, int theWidth, int theHeight, int id)
-            : base(Position, theWidth, theHeight, id)
+            : base(Position, theWidth, theHeight, id , "bookCaseTrigger")
         {
             texture = content.Load<Texture2D>("LevelObjects/woodtile");
 

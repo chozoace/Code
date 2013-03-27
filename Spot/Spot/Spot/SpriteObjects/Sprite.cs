@@ -19,6 +19,8 @@ namespace Spot
         ContentManager myContent;
         SpriteBatch mySpriteBatch;
 
+        public bool visible = true;
+        public string name;
         public Sprite collidingWall;
         protected int width;
         protected int height;
@@ -74,7 +76,8 @@ namespace Spot
 
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 camera)
         {
-            spriteBatch.Draw(texture, position - camera, Color.White);
+            if(visible)
+                spriteBatch.Draw(texture, position - camera, Color.White);
         }
 
         public virtual bool CheckCollision(Rectangle collisionBox)
@@ -82,7 +85,7 @@ namespace Spot
             wallList = LevelConstructor.Instance().getWallList();
             foreach (Wall wall in wallList)
             {
-                if (wall.BoundingBox.Intersects(collisionBox))
+                if (wall.BoundingBox.Intersects(collisionBox) && wall.visible)
                 {
                     collidingWall = wall;
                     return true;

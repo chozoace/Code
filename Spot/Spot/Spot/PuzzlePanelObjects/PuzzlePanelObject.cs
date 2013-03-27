@@ -25,7 +25,8 @@ namespace Spot
 
         public override void Update()
         {
-            if (CheckCollision(BoundingBox) && !LevelManager.Instance().player.canStartPuzzle)
+            Debug.WriteLine(LevelManager.Instance().panelOne.winEventOccured);
+            if (CheckCollision(BoundingBox) && !LevelManager.Instance().player.canStartPuzzle && !LevelManager.Instance().panelOne.winEventOccured)
             {
                 LevelManager.Instance().player.canStartPuzzle = true;
             }

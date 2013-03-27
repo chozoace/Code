@@ -315,14 +315,14 @@ namespace Spot
             List<Enemy> enemyList = LevelManager.Instance().getEnemyList();
             foreach (Enemy enemy in enemyList)
             {
-                if (collisionBox.Intersects(enemy.BoundingBox) && enemy != this)
+                if (collisionBox.Intersects(enemy.BoundingBox) && enemy != this && enemy.visible)
                 {
                     collidingWall = enemy;
                     return true;
                 }
             }
 
-            if (BoundingBox.Intersects(player.BoundingBox))
+            if (BoundingBox.Intersects(player.BoundingBox) && player.visible)
             {
                 collidingWall = player;
                 return true;
@@ -447,7 +447,7 @@ namespace Spot
         //        LevelManager.Instance().removefromSpriteList(this);
         //        LevelManager.Instance().removefromEnemyList(this);
 
-        //        splitting effect
+        //        //splitting effect
         //        enemy1 = new MeleeEnemy(position);
         //        LevelManager.Instance().addToSpriteList(enemy1);
         //        LevelManager.Instance().addToEnemyList(enemy1);

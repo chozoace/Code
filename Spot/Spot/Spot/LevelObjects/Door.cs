@@ -12,25 +12,18 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
 
-namespace Spot
+namespace Spot.LevelObjects
 {
-    class DeathBlock : Wall
+    class Door : Sprite
     {
-        public DeathBlock(Vector2 Position, int theWidth, int theHeight, int id)
-            : base(Position, theWidth, theHeight, id, "DeathBlock")
+        public Door(Vector2 newPos)
         {
-            
-
+            position = newPos;
+            width = 32;
+            height = 32;
+            texture = Game1.Instance().Content.Load<Texture2D>("LevelObjects/TestPuzzleBlock");
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
-        {
-            
-        }
 
-        public override void interact()
-        {
-            LevelManager.Instance().player.death();
-        }
     }
 }

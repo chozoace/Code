@@ -619,16 +619,20 @@ namespace Spot
             List<Enemy> enemyList = LevelManager.Instance().getEnemyList();
             foreach (Wall wall in wallList)
             {
-                if (wall.BoundingBox.Intersects(collisionBox))
+                if (wall.BoundingBox.Intersects(collisionBox) && wall.visible)
                 {
                     wall.interact();
                     collidingWall = wall;
+                    if (wall.name == "NextLevel")
+                    {
+                        LevelManager.Instance().nextLevel();
+                    }
                     return true;
                 }
             }
             foreach (Enemy enemy in enemyList)
             {
-                if (collisionBox.Intersects(enemy.BoundingBox))
+                if (collisionBox.Intersects(enemy.BoundingBox) && enemy.visible)
                 {
                     collidingWall = enemy;
                     currentAccel = 0;

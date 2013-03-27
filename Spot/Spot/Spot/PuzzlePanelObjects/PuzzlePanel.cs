@@ -21,7 +21,6 @@ namespace Spot
         public List<OpenPuzzleSlot> holeList = new List<OpenPuzzleSlot>();
         KeyboardState myKeyState, previousKeyState;
         public PuzzleCursor cursor;
-        static PuzzlePanel instance;
         public OpenPuzzleSlot[,] puzzleSlots = new OpenPuzzleSlot[3, 3];
         Sprite memoryFragment = null;
 
@@ -29,19 +28,13 @@ namespace Spot
         EventHandler currentEvent;
         public EventArgs eArgs = new EventArgs();
         Song tadaSound;
-        bool winEventOccured = false;
+        public bool winEventOccured = false;
         
         public PuzzlePanel()
         {
             cursor = new PuzzleCursor(new Vector2(100,100));
             currentEvent = new EventHandler(nothingState);
-            instance = this;
             tadaSound = Game1.Instance().Content.Load<Song>("Music/Tada");
-        }
-
-        public static PuzzlePanel Instance()
-        {
-            return instance;
         }
 
         public void loadPanelXML()
@@ -80,19 +73,27 @@ namespace Spot
             if (memoryFragment.position.Y < 240)
             {
                 memoryFragment.position.Y += 2;
-                Debug.WriteLine(memoryFragment.position);
             }
             else
             {
                 if (!winEventOccured)
                 {
-                    Debug.WriteLine("reached");
                     MediaPlayer.Play(tadaSound);
                     currentEvent = new EventHandler(nothingState);
                     fragmentTimer = new Timer(1500);
                     fragmentTimer.Elapsed += new ElapsedEventHandler(endPuzzle);
                     fragmentTimer.Enabled = true;
                     winEventOccured = true;
+                    List<Sprite> spriteList = new List<Sprite>();
+                    spriteList = LevelManager.Instance().spriteList;
+
+                    foreach (Sprite sprite in spriteList)
+                    {
+                        if (sprite.name == "Door")
+                        {
+                            sprite.visible = false;
+                        }
+                    }
                 }
             }
         }

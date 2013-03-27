@@ -114,6 +114,7 @@
     <Compile Include="Hitboxes\EnemyMeleeAttack.cs" />
     <Compile Include="LevelObjects\BookCaseTrigger.cs" />
     <Compile Include="LevelObjects\DeathBlock.cs" />
+    <Compile Include="LevelObjects\Door.cs" />
     <Compile Include="LevelObjects\FallingBookCase.cs" />
     <Compile Include="LevelObjects\OpenPuzzleSlot.cs" />
     <Compile Include="LevelObjects\PopUpEnemyTrigger.cs" />

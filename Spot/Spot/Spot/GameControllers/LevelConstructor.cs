@@ -110,12 +110,12 @@ namespace Spot
                     switch (getTileAt(spriteforX, spriteForY))
                     {
                         case 1:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1);
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1, "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 2:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2);
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2, "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
@@ -150,6 +150,16 @@ namespace Spot
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
+                        case 9:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Door");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 10:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
                     }
                 }
             }
@@ -176,7 +186,7 @@ namespace Spot
                     switch (getTileAt(spriteforX, spriteForY))
                     {
                         case 1:
-                            theObject = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 5);
+                            theObject = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 5, "puzzle");
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break;
                         case 18:
@@ -191,7 +201,7 @@ namespace Spot
                             LevelManager.Instance().panelOne.addToHoleList(slot);
                             break;
                         case 25:
-                            theObject = new Wall(new Vector2(destX, destY), 32, 32, 6);
+                            theObject = new Wall(new Vector2(destX, destY), 32, 32, 6, "puzzleHole");
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break; 
                     }

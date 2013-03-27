@@ -35,7 +35,8 @@ namespace Spot
             canInteract = interactable;
             row = myRow;
             column = myColumn;
-            PuzzlePanel.Instance().puzzleSlots[row, column] = this;
+            //PuzzlePanel.Instance().puzzleSlots[row, column] = this;
+            LevelManager.Instance().panelOne.puzzleSlots[row, column] = this;
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
