@@ -183,9 +183,9 @@ namespace Spot
                 LevelManager.Instance().removefromEnemyList(this);
 
                 if(facing == 0)
-                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X - 50, position.Y));
+                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X/* - 50*/, position.Y));
                 else
-                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X + 50, position.Y));
+                    myPuzzle = new CirclePuzzlePiece(new Vector2(position.X/* + 50*/, position.Y));
                 LevelManager.Instance().addToSpriteList(myPuzzle);
             }
         }

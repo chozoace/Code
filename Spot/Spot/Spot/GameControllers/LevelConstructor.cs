@@ -110,12 +110,12 @@ namespace Spot
                     switch (getTileAt(spriteforX, spriteForY))
                     {
                         case 1:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1, "Wall");
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2, "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 2:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2, "Wall");
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1, "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
@@ -126,14 +126,11 @@ namespace Spot
                         case 4:
                             theObject = new PuzzlePanelObject(new Vector2(destX, destY));
                             LevelManager.Instance().addToSpriteList(theObject);
-                            //enemy = new MeleeEnemy(new Vector2(destX, destY));
-                            //LevelManager.Instance().addToEnemyList(enemy);
-                            //LevelManager.Instance().addToSpriteList(enemy);
                             break;
                         case 5:
-                            theWall = new PopUpEnemyTrigger(new Vector2(destX, destY), tileWidth, tileHeight, 2);
-                            walls.Add(theWall);
-                            LevelManager.Instance().addToSpriteList(theWall);
+                            enemy = new MeleeEnemy(new Vector2(destX, destY));
+                            LevelManager.Instance().addToEnemyList(enemy);
+                            LevelManager.Instance().addToSpriteList(enemy);
                             break;
                         case 6:
                             theWall = new FallingBookCase(new Vector2(destX, destY));
@@ -141,21 +138,35 @@ namespace Spot
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 7:
-                            theWall = new BookCaseTrigger(new Vector2(destX, destY), tileWidth, tileHeight, 2);
-                            walls.Add(theWall);
-                            LevelManager.Instance().addToSpriteList(theWall);
-                            break;
-                        case 8:
-                            theWall = new DeathBlock(new Vector2(destX, destY), tileWidth, tileHeight, 2);
-                            walls.Add(theWall);
-                            LevelManager.Instance().addToSpriteList(theWall);
-                            break;
-                        case 9:
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Door");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
+                        case 8:
+                            theWall = new CrackedFloor(new Vector2(destX, destY));
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 9:
+                            //health
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Cracked");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
                         case 10:
+                            //weapon
+                            //theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
+                            //walls.Add(theWall);
+                            //LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 11:
+                            //bookcase trigger
+                            theWall = new BookCaseTrigger(new Vector2(destX, destY), tileWidth, tileHeight, 1);
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 12:
+                            //weapon
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);

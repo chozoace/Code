@@ -29,8 +29,14 @@ namespace Spot
 
         public Player player = null;
         public LevelConstructor level;
+
         public PuzzlePanel panelOne;
-        string levelOne = "Content/XML/Prototype1.xml";
+        //public PuzzlePanel panelTwo;
+        //public PuzzlePanel panelThree;
+        //public PuzzlePanel panelFour;
+        //public PuzzlePanel panelFive;
+
+        string levelOne = "Content/XML/Level1.xml";
         string levelTwo = "Content/XML/Prototype2.xml";
         string currentLevel;
         bool clearLists = false;
@@ -71,7 +77,12 @@ namespace Spot
         {
             currentLevel = theLevel;
             level = new LevelConstructor();
+
             panelOne = new PuzzlePanel();
+            //panelTwo = new PuzzlePanel();
+            //panelThree = new PuzzlePanel();
+            //panelFour = new PuzzlePanel();
+            //panelFive = new PuzzlePanel();
 
             LoadContent();
             clearLists = false;
@@ -80,7 +91,13 @@ namespace Spot
         public void LoadContent()
         {
             level.loadLevel(currentLevel);
+
             panelOne.loadPanelXML();
+            //panelTwo.loadPanelXML();
+            //panelThree.loadPanelXML();
+            //panelFour.loadPanelXML();
+            //panelFive.loadPanelXML();
+
             listWalls = level.getWallList();
             player.LoadContent(lmContent);
             blackScreen = Game1.Instance().Content.Load<Texture2D>("Menus/BlackScreen");
@@ -147,6 +164,7 @@ namespace Spot
                 else if (levelState == LevelState.NextLevel)
                     Initialize(levelTwo);
                 camera.X = player.BoundingBox.X - 288;
+                camera.Y = player.BoundingBox.Y - 208;
             }
         }
 
@@ -156,11 +174,11 @@ namespace Spot
             {
                 if (player.BoundingBox.Y > camera.Y + 208)
                 {
-                    //camera.Y = player.BoundingBox.Y + 208;
+                    camera.Y = player.BoundingBox.Y + 208;
                 }
                 if (player.BoundingBox.Y < camera.Y + 208)
                 {
-                    //camera.Y = player.BoundingBox.Y - 208;
+                    camera.Y = player.BoundingBox.Y - 208;
                 }
                 if (player.BoundingBox.X > camera.X + 288)
                 {
