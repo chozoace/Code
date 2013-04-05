@@ -26,7 +26,7 @@ namespace Spot
         string squareTex = "LevelObjects/SquareHoleGreen";
 
 
-        public OpenPuzzleSlot(Vector2 newPos, int theWidth, int theHeight, bool interactable, int myRow, int myColumn)
+        public OpenPuzzleSlot(Vector2 newPos, int theWidth, int theHeight, bool interactable, int myRow, int myColumn, int currentPanel)
         {
             position = newPos;
             width = theWidth;
@@ -36,7 +36,25 @@ namespace Spot
             row = myRow;
             column = myColumn;
             //PuzzlePanel.Instance().puzzleSlots[row, column] = this;
-            LevelManager.Instance().panelOne.puzzleSlots[row, column] = this;
+
+            switch (currentPanel)
+            {
+                case 1:
+                    LevelManager.Instance().panelOne.puzzleSlots[row, column] = this;
+                    break;
+                case 2:
+                    LevelManager.Instance().panelTwo.puzzleSlots[row, column] = this;
+                    break;
+                case 3:
+                    LevelManager.Instance().panelThree.puzzleSlots[row, column] = this;
+                    break;
+                case 4:
+                    LevelManager.Instance().panelFour.puzzleSlots[row, column] = this;
+                    break;
+                case 5:
+                    LevelManager.Instance().panelFive.puzzleSlots[row, column] = this;
+                    break;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 camera)

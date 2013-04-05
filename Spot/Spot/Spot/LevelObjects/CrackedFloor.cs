@@ -22,7 +22,7 @@ namespace Spot
             width = 32;
             height = 32;
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);
-            currentAnimation = "LevelObjects/brickTile";
+            currentAnimation = "LevelObjects/CrackedBrick";
 
             texture = Game1.Instance().Content.Load<Texture2D>(currentAnimation);
         }

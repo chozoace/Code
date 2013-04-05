@@ -29,6 +29,8 @@ namespace Spot
         public EventArgs eArgs = new EventArgs();
         Song tadaSound;
         public bool winEventOccured = false;
+
+        public bool canStartPuzzle = false;
         
         public PuzzlePanel()
         {
@@ -37,9 +39,9 @@ namespace Spot
             tadaSound = Game1.Instance().Content.Load<Song>("Music/Tada");
         }
 
-        public void loadPanelXML()
+        public void loadPanelXML(int currentPanel)
         {
-            LevelManager.Instance().level.XmlLoad(puzzlePanelLevelOne, "puzzle");
+            LevelManager.Instance().level.XmlLoad(puzzlePanelLevelOne, "puzzle", currentPanel);
             addToSpriteList(cursor);
         }
 
@@ -106,6 +108,7 @@ namespace Spot
         
         public override void  Update()
         {
+            Debug.WriteLine(cursor.position);
             currentEvent(this, eArgs);
 
             foreach (Sprite sprite in spriteList)

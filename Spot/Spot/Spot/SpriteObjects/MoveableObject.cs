@@ -19,6 +19,7 @@ namespace Spot
         public int health = 1;
         protected bool controlsLocked = false;
         protected int maxSpeed;
+        public int maxHealth;
         public int facing;
         public Vector2 speed;
         protected float accelRate;

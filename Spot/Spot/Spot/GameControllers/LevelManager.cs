@@ -31,12 +31,13 @@ namespace Spot
         public LevelConstructor level;
 
         public PuzzlePanel panelOne;
-        //public PuzzlePanel panelTwo;
-        //public PuzzlePanel panelThree;
-        //public PuzzlePanel panelFour;
-        //public PuzzlePanel panelFive;
+        public PuzzlePanel panelTwo;
+        public PuzzlePanel panelThree;
+        public PuzzlePanel panelFour;
+        public PuzzlePanel panelFive;
+        int currentPanel;
 
-        string levelOne = "Content/XML/Level1.xml";
+        string levelOne = "Content/XML/Level1.1.xml";
         string levelTwo = "Content/XML/Prototype2.xml";
         string currentLevel;
         bool clearLists = false;
@@ -79,10 +80,10 @@ namespace Spot
             level = new LevelConstructor();
 
             panelOne = new PuzzlePanel();
-            //panelTwo = new PuzzlePanel();
-            //panelThree = new PuzzlePanel();
-            //panelFour = new PuzzlePanel();
-            //panelFive = new PuzzlePanel();
+            panelTwo = new PuzzlePanel();
+            panelThree = new PuzzlePanel();
+            panelFour = new PuzzlePanel();
+            panelFive = new PuzzlePanel();
 
             LoadContent();
             clearLists = false;
@@ -92,11 +93,11 @@ namespace Spot
         {
             level.loadLevel(currentLevel);
 
-            panelOne.loadPanelXML();
-            //panelTwo.loadPanelXML();
-            //panelThree.loadPanelXML();
-            //panelFour.loadPanelXML();
-            //panelFive.loadPanelXML();
+            panelOne.loadPanelXML(1);
+            panelTwo.loadPanelXML(2);
+            panelThree.loadPanelXML(3);
+            panelFour.loadPanelXML(4);
+            panelFive.loadPanelXML(5);
 
             listWalls = level.getWallList();
             player.LoadContent(lmContent);
@@ -141,7 +142,25 @@ namespace Spot
             }
             else if (levelState == LevelState.Puzzle)
             {
-                panelOne.Update();
+                Debug.WriteLine(currentPanel);
+                switch (currentPanel)
+                {
+                    case 1:
+                        panelOne.Update();
+                        break;
+                    case 2:
+                        panelTwo.Update();
+                        break;
+                    case 3:
+                        panelThree.Update();
+                        break;
+                    case 4:
+                        panelFour.Update();
+                        break;
+                    case 5:
+                        panelFive.Update();
+                        break;
+                }
             }
             else if (levelState == LevelState.NextLevel)
             {
@@ -290,10 +309,33 @@ namespace Spot
 
         }
 
-        public void startPuzzle()
+        public void startPuzzle(int puzzleNum)
         {
             levelState = LevelState.Puzzle;
-            panelOne.cursor.canKpress = false;
+
+            switch (puzzleNum)
+            {
+                case 1:
+                    panelOne.cursor.canKpress = false;
+                    currentPanel = puzzleNum;
+                    break;
+                case 2:
+                    panelTwo.cursor.canKpress = false;
+                    currentPanel = puzzleNum;
+                    break;
+                case 3: 
+                    panelThree.cursor.canKpress = false;
+                    currentPanel = puzzleNum;
+                    break;
+                case 4:
+                    panelFour.cursor.canKpress = false;
+                    currentPanel = puzzleNum;
+                    break;
+                case 5:
+                    panelFive.cursor.canKpress = false;
+                    currentPanel = puzzleNum;
+                    break;
+            }
             //level.XmlLoad(puzzlePanelLevelOne, "puzzle");
         }
     }

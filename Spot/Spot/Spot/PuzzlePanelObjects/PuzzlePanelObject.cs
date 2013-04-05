@@ -15,24 +15,45 @@ namespace Spot
 {
     class PuzzlePanelObject : Sprite
     {
-        public PuzzlePanelObject(Vector2 newPos)
+        PuzzlePanel myPanel;
+        bool canStartPuzzle = false;
+
+        public PuzzlePanelObject(Vector2 newPos, int currentPanel)
         {
             position = newPos;
             width = 32;
             height = 32;
             texture = Game1.Instance().Content.Load<Texture2D>("LevelObjects/TestPuzzleBlock");
+
+            switch (currentPanel)
+            {
+                case 1:
+                    myPanel = LevelManager.Instance().panelOne;
+                    break;
+                case 2:
+                    myPanel = LevelManager.Instance().panelTwo;
+                    break;
+                case 3:
+                    myPanel = LevelManager.Instance().panelThree;
+                    break;
+                case 4:
+                    myPanel = LevelManager.Instance().panelFour;
+                    break;
+                case 5:
+                    myPanel = LevelManager.Instance().panelFive;
+                    break;
+            }
         }
 
         public override void Update()
         {
-            Debug.WriteLine(LevelManager.Instance().panelOne.winEventOccured);
-            if (CheckCollision(BoundingBox) && !LevelManager.Instance().player.canStartPuzzle && !LevelManager.Instance().panelOne.winEventOccured)
+            if (CheckCollision(BoundingBox) && !myPanel.canStartPuzzle && !myPanel.winEventOccured)
             {
-                LevelManager.Instance().player.canStartPuzzle = true;
+                myPanel.canStartPuzzle = true;
             }
-            else if (!CheckCollision(BoundingBox) && LevelManager.Instance().player.canStartPuzzle)
+            else if (!CheckCollision(BoundingBox) && myPanel.canStartPuzzle)
             {
-                LevelManager.Instance().player.canStartPuzzle = false;
+                myPanel.canStartPuzzle = false;
             }
         }
 

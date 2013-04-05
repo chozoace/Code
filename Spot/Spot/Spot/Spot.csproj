@@ -29,7 +29,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -130,8 +130,10 @@
     <Compile Include="LevelObjects\DeathBlock.cs" />
     <Compile Include="LevelObjects\Door.cs" />
     <Compile Include="LevelObjects\FallingBookCase.cs" />
-    <Compile Include="LevelObjects\OpenPuzzleSlot.cs" />
+    <Compile Include="LevelObjects\HealthPickUp.cs" />
+    <Compile Include="PuzzlePanelObjects\OpenPuzzleSlot.cs" />
     <Compile Include="LevelObjects\PopUpEnemyTrigger.cs" />
+    <Compile Include="Player\HUD.cs" />
     <Compile Include="Player\PuzzleCursor.cs" />
     <Compile Include="PuzzlePanelObjects\PuzzlePanel.cs" />
     <Compile Include="Hitboxes\Hitbox.cs" />

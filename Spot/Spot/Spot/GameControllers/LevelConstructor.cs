@@ -59,11 +59,11 @@ namespace Spot
         public void loadLevel(String level)
         {
             currentLevel = level;
-            XmlLoad(currentLevel, "level");
+            XmlLoad(currentLevel, "level", 0);
         }
 
         //begin XML here
-        public void XmlLoad(String level, String levelType)
+        public void XmlLoad(String level, String levelType, int currentPanel)
         {
             //map, tileset and layer, data, tile 
             xDoc = new XmlDocument();
@@ -90,7 +90,7 @@ namespace Spot
                 {
                     gidList.Add(int.Parse(xNode.Attributes.GetNamedItem("gid").Value));
                 }
-                tileLoadPuzzlePanel();
+                tileLoadPuzzlePanel(currentPanel);
             }
         }
 
@@ -99,6 +99,7 @@ namespace Spot
             Wall theWall;
             Enemy enemy;
             Sprite theObject;
+            int currentPanel = 1;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -124,8 +125,9 @@ namespace Spot
                             playerYpos = destY;
                             break;
                         case 4:
-                            theObject = new PuzzlePanelObject(new Vector2(destX, destY));
+                            theObject = new PuzzlePanelObject(new Vector2(destX, destY), currentPanel);
                             LevelManager.Instance().addToSpriteList(theObject);
+                            currentPanel++;
                             break;
                         case 5:
                             enemy = new MeleeEnemy(new Vector2(destX, destY));
@@ -149,9 +151,8 @@ namespace Spot
                             break;
                         case 9:
                             //health
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Cracked");
-                            walls.Add(theWall);
-                            LevelManager.Instance().addToSpriteList(theWall);
+                            theObject = new HealthPickUp(new Vector2(destX, destY));
+                            LevelManager.Instance().addToSpriteList(theObject);
                             break;
                         case 10:
                             //weapon
@@ -166,7 +167,7 @@ namespace Spot
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 12:
-                            //weapon
+                            //next Level
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
@@ -178,10 +179,11 @@ namespace Spot
             LevelManager.Instance().addToSpriteList(LevelManager.Instance().player);
         }
 
-        public void tileLoadPuzzlePanel()
+        public void tileLoadPuzzlePanel(int cPanel)
         {
             //Wall theWall;
             //Enemy enemy;
+            int currentPanel = cPanel;
             Sprite theObject;
             OpenPuzzleSlot slot;
             int slotRow = 0;
@@ -201,19 +203,57 @@ namespace Spot
                             LevelManager.Instance().panelOne.addToSpriteList(theObject);
                             break;
                         case 18:
-                            slot = new OpenPuzzleSlot(new Vector2(destX, destY), 160, 128, false, slotRow, slotColumn);
+                            slot = new OpenPuzzleSlot(new Vector2(destX, destY), 160, 128, false, slotRow, slotColumn, currentPanel);
                             slotRow++;
                             if (slotRow > 2)
                             {
                                 slotRow = 0;
                                 slotColumn++;
                             }
-                            LevelManager.Instance().panelOne.addToSpriteList(slot);
-                            LevelManager.Instance().panelOne.addToHoleList(slot);
+                            switch (currentPanel)
+                            {
+                                case 1:
+                                    LevelManager.Instance().panelOne.addToSpriteList(slot);
+                                    LevelManager.Instance().panelOne.addToHoleList(slot);
+                                    break;
+                                case 2:
+                                    LevelManager.Instance().panelTwo.addToSpriteList(slot);
+                                    LevelManager.Instance().panelTwo.addToHoleList(slot);
+                                    break;
+                                case 3:
+                                    LevelManager.Instance().panelThree.addToSpriteList(slot);
+                                    LevelManager.Instance().panelThree.addToHoleList(slot);
+                                    break;
+                                case 4:
+                                    LevelManager.Instance().panelFour.addToSpriteList(slot);
+                                    LevelManager.Instance().panelFour.addToHoleList(slot);
+                                    break;
+                                case 5:
+                                    LevelManager.Instance().panelFive.addToSpriteList(slot);
+                                    LevelManager.Instance().panelFive.addToHoleList(slot);
+                                    break;
+                            }
                             break;
                         case 25:
                             theObject = new Wall(new Vector2(destX, destY), 32, 32, 6, "puzzleHole");
-                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            switch (currentPanel)
+                            {
+                                case 1:
+                                    LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                                    break;
+                                case 2:
+                                    LevelManager.Instance().panelTwo.addToSpriteList(theObject);
+                                    break;
+                                case 3:
+                                    LevelManager.Instance().panelThree.addToSpriteList(theObject);
+                                    break;
+                                case 4:
+                                    LevelManager.Instance().panelFour.addToSpriteList(theObject);
+                                    break;
+                                case 5:
+                                    LevelManager.Instance().panelFive.addToSpriteList(theObject);
+                                    break;
+                            }
                             break; 
                     }
                 }

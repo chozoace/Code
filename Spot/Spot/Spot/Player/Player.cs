@@ -74,6 +74,7 @@ namespace Spot
         LightAttack lAttack = null;
 
         GamePadState padState;
+        HUD hud;
 
         public Player(Vector2 newPos)
         {
@@ -82,6 +83,7 @@ namespace Spot
             XmlNode playerNode = myStats.FirstChild;
 
             health = int.Parse(playerNode.Attributes.GetNamedItem("health").Value);
+            maxHealth = health;
             height = int.Parse(playerNode.Attributes.GetNamedItem("height").Value);
             width = int.Parse(playerNode.Attributes.GetNamedItem("width").Value);
             maxSpeed = int.Parse(playerNode.Attributes.GetNamedItem("maxSpeed").Value);
@@ -95,6 +97,10 @@ namespace Spot
             position = newPos;
             speed = new Vector2(0, 0);
             currentAccel = 0;
+
+            hud = new HUD(position.X);
+            hud.Font = Game1.Instance().Content.Load<SpriteFont>("Arial");
+            hud.Health = health;
 
             idleAnim = "Player/HeroIdleRight";
             idleLeftAnim = "Player/HeroIdleLeft";
@@ -151,6 +157,11 @@ namespace Spot
                 controlsLocked = true;
                 death();
             }
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+            hud.Health = health;
         }
 
         public void death()
@@ -300,10 +311,35 @@ namespace Spot
                     if (CheckCollision(BottomBox) && canAttack && canKpress)
                     {
                         //k button code
-                        if (canStartPuzzle)
+                        //if (canStartPuzzle)
+                        //{
+                        //    LevelManager.Instance().startPuzzle();
+                        //    //controlsLocked = true;
+                        //}
+                        if (LevelManager.Instance().panelOne.canStartPuzzle)
                         {
-                            LevelManager.Instance().startPuzzle();
-                            //controlsLocked = true;
+                            Debug.WriteLine("1");
+                            LevelManager.Instance().startPuzzle(1);
+                        }
+                        if (LevelManager.Instance().panelTwo.canStartPuzzle)
+                        {
+                            Debug.WriteLine("2");
+                            LevelManager.Instance().startPuzzle(2);
+                        }
+                        if (LevelManager.Instance().panelThree.canStartPuzzle)
+                        {
+                            Debug.WriteLine("3");
+                            LevelManager.Instance().startPuzzle(3);
+                        }
+                        if (LevelManager.Instance().panelFour.canStartPuzzle)
+                        {
+                            Debug.WriteLine("4");
+                            LevelManager.Instance().startPuzzle(4);
+                        }
+                        if (LevelManager.Instance().panelFive.canStartPuzzle)
+                        {
+                            Debug.WriteLine("5");
+                            LevelManager.Instance().startPuzzle(5);
                         }
                     }
                 }
@@ -654,5 +690,12 @@ namespace Spot
             base.endHitstun(sender, e);
         }
 
+        public override void Draw(SpriteBatch spriteBatch, Vector2 camera)
+        {
+            //drawCollisionBox(spriteBatch, myContent, camera);
+            hud.Draw(spriteBatch, camera, position);
+
+            base.Draw(spriteBatch, camera);
+        }
     }
 }
