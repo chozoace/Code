@@ -29,9 +29,11 @@ namespace Spot
         List<OpenPuzzleSlot> holeList;
         OpenPuzzleSlot currentSlot;
         public bool controlsLocked = false;
+        int panelNumber;
 
-        public PuzzleCursor(Vector2 newPos)
+        public PuzzleCursor(Vector2 newPos, int panelNum)
         {
+            panelNumber = panelNum;
             position = newPos;
             texture = Game1.Instance().Content.Load<Texture2D>(block1);
             currentTexture = block1;
@@ -119,7 +121,24 @@ namespace Spot
 
         public override bool CheckCollision(Rectangle collisionBox)
         {
-            holeList = LevelManager.Instance().panelOne.holeList;
+            switch(panelNumber)
+            {
+                case 1:
+                    holeList = LevelManager.Instance().panelOne.holeList;
+                    break;
+                case 2:
+                    holeList = LevelManager.Instance().panelTwo.holeList;
+                    break;
+                case 3:
+                    holeList = LevelManager.Instance().panelThree.holeList;
+                    break;
+                case 4:
+                    holeList = LevelManager.Instance().panelFour.holeList;
+                    break;
+                case 5:
+                    holeList = LevelManager.Instance().panelFive.holeList;
+                    break;
+            }
             foreach (OpenPuzzleSlot hole in holeList)
             {
                 if(collisionBox.Intersects(hole.BoundingBox))

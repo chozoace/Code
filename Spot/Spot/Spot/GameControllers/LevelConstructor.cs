@@ -200,7 +200,24 @@ namespace Spot
                     {
                         case 1:
                             theObject = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 5, "puzzle");
-                            LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                            switch (currentPanel)
+                            {
+                                case 1:
+                                    LevelManager.Instance().panelOne.addToSpriteList(theObject);
+                                    break;
+                                case 2:
+                                    LevelManager.Instance().panelTwo.addToSpriteList(theObject);
+                                    break;
+                                case 3:
+                                    LevelManager.Instance().panelThree.addToSpriteList(theObject);
+                                    break;
+                                case 4:
+                                    LevelManager.Instance().panelFour.addToSpriteList(theObject);
+                                    break;
+                                case 5:
+                                    LevelManager.Instance().panelFive.addToSpriteList(theObject);
+                                    break;
+                            }
                             break;
                         case 18:
                             slot = new OpenPuzzleSlot(new Vector2(destX, destY), 160, 128, false, slotRow, slotColumn, currentPanel);

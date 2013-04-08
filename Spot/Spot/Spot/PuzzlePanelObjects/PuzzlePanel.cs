@@ -31,12 +31,22 @@ namespace Spot
         public bool winEventOccured = false;
 
         public bool canStartPuzzle = false;
+
+        int diagLeftRight;
+        int diagRightLeft;
+        int centColumn;
+        int centRow;
         
-        public PuzzlePanel()
+        public PuzzlePanel(int panelNum)
         {
-            cursor = new PuzzleCursor(new Vector2(100,100));
+            cursor = new PuzzleCursor(new Vector2(100,100), panelNum);
             currentEvent = new EventHandler(nothingState);
             tadaSound = Game1.Instance().Content.Load<Song>("Music/Tada");
+
+            diagLeftRight = 1;
+            diagRightLeft = 1;
+            centColumn = 1;
+            centRow = 1;
         }
 
         public void loadPanelXML(int currentPanel)
@@ -93,7 +103,10 @@ namespace Spot
                     {
                         if (sprite.name == "Door")
                         {
-                            sprite.visible = false;
+                            if (sprite.position.X > LevelManager.Instance().player.position.X - 150 && sprite.position.X < LevelManager.Instance().player.position.X)
+                                sprite.visible = false;
+                            else if (sprite.position.X < LevelManager.Instance().player.position.X + 150 && sprite.position.X > LevelManager.Instance().player.position.X)
+                                sprite.visible = false;
                         }
                     }
                 }
@@ -108,7 +121,6 @@ namespace Spot
         
         public override void  Update()
         {
-            Debug.WriteLine(cursor.position);
             currentEvent(this, eArgs);
 
             foreach (Sprite sprite in spriteList)
@@ -116,10 +128,10 @@ namespace Spot
                 sprite.Update();
             }
             //checks win
-            if (puzzleSlots[0, 0].points + puzzleSlots[1, 1].points + puzzleSlots[2, 2].points == 1)//diagonal left to right
-                if (puzzleSlots[0, 2].points + puzzleSlots[1, 1].points + puzzleSlots[2, 0].points == 1)//diagonal right to left
-                        if (puzzleSlots[0, 1].points + puzzleSlots[1, 1].points + puzzleSlots[2, 1].points == 1)//column
-                            if (puzzleSlots[1, 0].points + puzzleSlots[1, 1].points + puzzleSlots[1, 2].points == 1)//row
+            if (puzzleSlots[0, 0].points + puzzleSlots[1, 1].points + puzzleSlots[2, 2].points == diagLeftRight)//diagonal left to right
+                if (puzzleSlots[0, 2].points + puzzleSlots[1, 1].points + puzzleSlots[2, 0].points == diagRightLeft)//diagonal right to left
+                        if (puzzleSlots[0, 1].points + puzzleSlots[1, 1].points + puzzleSlots[2, 1].points == centColumn)//column
+                            if (puzzleSlots[1, 0].points + puzzleSlots[1, 1].points + puzzleSlots[1, 2].points == centRow)//row
                             {
                                 currentEvent = new EventHandler(winState);
                             }

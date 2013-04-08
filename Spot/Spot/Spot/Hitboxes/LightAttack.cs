@@ -18,7 +18,7 @@ namespace Spot
     {
         public LightAttack(int x, int y, ContentManager content, int facing)
         {
-            visible = false;
+            visible = true;
             isEnemyAttack = false;
             startup = 20;
             active = 200;

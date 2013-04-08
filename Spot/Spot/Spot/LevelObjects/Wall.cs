@@ -15,6 +15,7 @@ namespace Spot
 {
     class Wall : Sprite
     {
+        // public int name = 5;
         protected Rectangle boundingBox;
         protected ContentManager content;
         public int imageId;
@@ -35,7 +36,7 @@ namespace Spot
             width = theWidth;
             height = theHeight;
             content = Game1.Instance().getContent();
-            imageId = id;
+            imageId = id; 
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
         }
 

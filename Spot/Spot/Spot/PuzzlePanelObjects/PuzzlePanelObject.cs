@@ -17,6 +17,7 @@ namespace Spot
     {
         PuzzlePanel myPanel;
         bool canStartPuzzle = false;
+        bool active = true;
 
         public PuzzlePanelObject(Vector2 newPos, int currentPanel)
         {
@@ -47,13 +48,20 @@ namespace Spot
 
         public override void Update()
         {
-            if (CheckCollision(BoundingBox) && !myPanel.canStartPuzzle && !myPanel.winEventOccured)
+            if (active)
             {
-                myPanel.canStartPuzzle = true;
+                if (CheckCollision(BoundingBox) && !myPanel.canStartPuzzle && !myPanel.winEventOccured)
+                {
+                    myPanel.canStartPuzzle = true;
+                }
+                else if (!CheckCollision(BoundingBox) && myPanel.canStartPuzzle && myPanel.winEventOccured)
+                {
+                    myPanel.canStartPuzzle = false;
+                }
             }
-            else if (!CheckCollision(BoundingBox) && myPanel.canStartPuzzle)
+            if (myPanel.winEventOccured)
             {
-                myPanel.canStartPuzzle = false;
+                active = false;
             }
         }
 

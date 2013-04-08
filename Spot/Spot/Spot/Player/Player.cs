@@ -311,34 +311,24 @@ namespace Spot
                     if (CheckCollision(BottomBox) && canAttack && canKpress)
                     {
                         //k button code
-                        //if (canStartPuzzle)
-                        //{
-                        //    LevelManager.Instance().startPuzzle();
-                        //    //controlsLocked = true;
-                        //}
-                        if (LevelManager.Instance().panelOne.canStartPuzzle)
+                        if (LevelManager.Instance().panelOne.canStartPuzzle && !LevelManager.Instance().panelOne.winEventOccured)
                         {
-                            Debug.WriteLine("1");
                             LevelManager.Instance().startPuzzle(1);
                         }
-                        if (LevelManager.Instance().panelTwo.canStartPuzzle)
+                        if (LevelManager.Instance().panelTwo.canStartPuzzle && !LevelManager.Instance().panelTwo.winEventOccured)
                         {
-                            Debug.WriteLine("2");
                             LevelManager.Instance().startPuzzle(2);
                         }
-                        if (LevelManager.Instance().panelThree.canStartPuzzle)
+                        if (LevelManager.Instance().panelThree.canStartPuzzle && !LevelManager.Instance().panelThree.winEventOccured)
                         {
-                            Debug.WriteLine("3");
                             LevelManager.Instance().startPuzzle(3);
                         }
-                        if (LevelManager.Instance().panelFour.canStartPuzzle)
+                        if (LevelManager.Instance().panelFour.canStartPuzzle && !LevelManager.Instance().panelFour.winEventOccured)
                         {
-                            Debug.WriteLine("4");
                             LevelManager.Instance().startPuzzle(4);
                         }
-                        if (LevelManager.Instance().panelFive.canStartPuzzle)
+                        if (LevelManager.Instance().panelFive.canStartPuzzle && !LevelManager.Instance().panelFive.winEventOccured)
                         {
-                            Debug.WriteLine("5");
                             LevelManager.Instance().startPuzzle(5);
                         }
                     }

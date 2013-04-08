@@ -79,11 +79,11 @@ namespace Spot
             currentLevel = theLevel;
             level = new LevelConstructor();
 
-            panelOne = new PuzzlePanel();
-            panelTwo = new PuzzlePanel();
-            panelThree = new PuzzlePanel();
-            panelFour = new PuzzlePanel();
-            panelFive = new PuzzlePanel();
+            panelOne = new PuzzlePanel(1);
+            panelTwo = new PuzzlePanel(2);
+            panelThree = new PuzzlePanel(3);
+            panelFour = new PuzzlePanel(4);
+            panelFive = new PuzzlePanel(5);
 
             LoadContent();
             clearLists = false;
@@ -142,7 +142,6 @@ namespace Spot
             }
             else if (levelState == LevelState.Puzzle)
             {
-                Debug.WriteLine(currentPanel);
                 switch (currentPanel)
                 {
                     case 1:
@@ -240,7 +239,24 @@ namespace Spot
             }
             else if (levelState == LevelState.Puzzle)
             {
-                panelOne.drawPanel(spriteBatch, camera);
+                switch(currentPanel)
+                {
+                    case 1:
+                        panelOne.drawPanel(spriteBatch, camera);
+                        break;
+                    case 2:
+                        panelTwo.drawPanel(spriteBatch, camera);
+                        break;
+                    case 3:
+                        panelThree.drawPanel(spriteBatch, camera);
+                        break;
+                    case 4:
+                        panelFour.drawPanel(spriteBatch, camera);
+                        break;
+                    case 5:
+                        panelFive.drawPanel(spriteBatch, camera);
+                        break;
+                }
             }
             else if (levelState == LevelState.NextLevel || levelState == LevelState.Restarting)
             {
