@@ -15,7 +15,6 @@ namespace Spot
 {
     class Wall : Sprite
     {
-        // public int name = 5;
         protected Rectangle boundingBox;
         protected ContentManager content;
         public int imageId;
@@ -38,6 +37,14 @@ namespace Spot
             content = Game1.Instance().getContent();
             imageId = id; 
             boundingBox = new Rectangle((int)position.X, (int)position.Y, width, height);//this is needed to draw
+            
+            if (myName == "puzzleHole")
+            {
+                id -= 2;
+                animationRect = new Rectangle(id * 32, 0, width, height);
+                texture = content.Load<Texture2D>("PuzzlePanelSprites/numberTiles");
+                textureLoaded = true;
+            }
         }
 
         public Wall(Vector2 Position, int theWidth, int theHeight, string tex, string myName)
@@ -82,7 +89,10 @@ namespace Spot
                             texture = content.Load<Texture2D>("LevelObjects/NumOne");
                             break;
                     }
-                base.Draw(spriteBatch, camera);
+                if(name != "puzzleHole")
+                    base.Draw(spriteBatch, camera);
+                else
+                    spriteBatch.Draw(texture, position - camera, animationRect, Color.White);
             }
         }
 

@@ -11,12 +11,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
+using System.Xml;
 
 namespace Spot
 {
     class PuzzlePanel : Sprite
     {
-        string puzzlePanelLevelOne = "Content/XML/PuzzleTestScreen.xml";
+        string puzzlePanelLevelOne = "Content/XML/PuzzlePanel1.xml";
+        string panelString;
         List<Sprite> spriteList = new List<Sprite>();
         public List<OpenPuzzleSlot> holeList = new List<OpenPuzzleSlot>();
         KeyboardState myKeyState, previousKeyState;
@@ -37,16 +39,18 @@ namespace Spot
         int centColumn;
         int centRow;
         
-        public PuzzlePanel(int panelNum)
+        public PuzzlePanel(int panelNum, string panelXML)
         {
             cursor = new PuzzleCursor(new Vector2(100,100), panelNum);
             currentEvent = new EventHandler(nothingState);
             tadaSound = Game1.Instance().Content.Load<Song>("Music/Tada");
 
-            diagLeftRight = 1;
-            diagRightLeft = 1;
-            centColumn = 1;
-            centRow = 1;
+            panelString = panelXML;
+
+            //diagLeftRight = 1;
+            //diagRightLeft = 1;
+            //centColumn = 1;
+            //centRow = 1;
         }
 
         public void loadPanelXML(int currentPanel)
@@ -118,6 +122,33 @@ namespace Spot
             fragmentTimer.Dispose();
             LevelManager.Instance().levelState = LevelManager.LevelState.Gameplay;
         }
+
+        public void assignWinConditions(int blockNum, int winNum)
+        {
+            if (winNum == 10)
+            {
+                winNum = -1;
+            }
+            switch (blockNum)
+            {
+                case 1: case 8:
+                    diagLeftRight = winNum;
+                    break;
+                case 2: case 7:
+                    centColumn = winNum;
+                    break;
+                case 3: case 6:
+                    diagRightLeft = winNum;
+                    break;
+                case 4: case 5:
+                    centRow = winNum;
+                    break;
+            }
+            if (blockNum == 8)
+            {
+                Debug.WriteLine("diagLR " + diagLeftRight + " diagRL " + diagRightLeft + " row " + centRow + " column " + centColumn);
+            }
+        }
         
         public override void  Update()
         {
@@ -128,10 +159,10 @@ namespace Spot
                 sprite.Update();
             }
             //checks win
-            if (puzzleSlots[0, 0].points + puzzleSlots[1, 1].points + puzzleSlots[2, 2].points == diagLeftRight)//diagonal left to right
-                if (puzzleSlots[0, 2].points + puzzleSlots[1, 1].points + puzzleSlots[2, 0].points == diagRightLeft)//diagonal right to left
-                        if (puzzleSlots[0, 1].points + puzzleSlots[1, 1].points + puzzleSlots[2, 1].points == centColumn)//column
-                            if (puzzleSlots[1, 0].points + puzzleSlots[1, 1].points + puzzleSlots[1, 2].points == centRow)//row
+            if ((puzzleSlots[0, 0].points + puzzleSlots[1, 1].points + puzzleSlots[2, 2].points == diagLeftRight) || diagLeftRight == -1)//diagonal left to right
+                if ((puzzleSlots[0, 2].points + puzzleSlots[1, 1].points + puzzleSlots[2, 0].points == diagRightLeft) || diagRightLeft == -1)//diagonal right to left
+                        if ((puzzleSlots[0, 1].points + puzzleSlots[1, 1].points + puzzleSlots[2, 1].points == centRow) || centRow == -1)//row
+                            if ((puzzleSlots[1, 0].points + puzzleSlots[1, 1].points + puzzleSlots[1, 2].points == centColumn) || centColumn == -1)//column
                             {
                                 currentEvent = new EventHandler(winState);
                             }

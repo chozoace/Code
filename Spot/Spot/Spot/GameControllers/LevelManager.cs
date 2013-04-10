@@ -40,6 +40,7 @@ namespace Spot
         string levelOne = "Content/XML/Level1.1.xml";
         string levelTwo = "Content/XML/Prototype2.xml";
         string currentLevel;
+
         bool clearLists = false;
         List<Wall> listWalls = new List<Wall>();
         public List<Sprite> spriteList = new List<Sprite>();
@@ -79,11 +80,14 @@ namespace Spot
             currentLevel = theLevel;
             level = new LevelConstructor();
 
-            panelOne = new PuzzlePanel(1);
-            panelTwo = new PuzzlePanel(2);
-            panelThree = new PuzzlePanel(3);
-            panelFour = new PuzzlePanel(4);
-            panelFive = new PuzzlePanel(5);
+            if (currentLevel == levelOne)
+            {
+                panelOne = new PuzzlePanel(1, "");
+                panelTwo = new PuzzlePanel(2, "");
+                panelThree = new PuzzlePanel(3, "");
+                panelFour = new PuzzlePanel(4, "");
+                panelFive = new PuzzlePanel(5, "");
+            }
 
             LoadContent();
             clearLists = false;
@@ -93,11 +97,14 @@ namespace Spot
         {
             level.loadLevel(currentLevel);
 
-            panelOne.loadPanelXML(1);
-            panelTwo.loadPanelXML(2);
-            panelThree.loadPanelXML(3);
-            panelFour.loadPanelXML(4);
-            panelFive.loadPanelXML(5);
+            if (currentLevel == levelOne)
+            {
+                panelOne.loadPanelXML(1);
+                panelTwo.loadPanelXML(2);
+                panelThree.loadPanelXML(3);
+                panelFour.loadPanelXML(4);
+                panelFive.loadPanelXML(5);
+            }
 
             listWalls = level.getWallList();
             player.LoadContent(lmContent);

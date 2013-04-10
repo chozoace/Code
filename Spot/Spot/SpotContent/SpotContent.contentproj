@@ -282,8 +282,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="XML\PuzzleTestScreen.xml">
-      <Name>PuzzleTestScreen</Name>
+    <None Include="XML\PuzzlePanel1.xml">
+      <Name>PuzzlePanel1</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -432,6 +432,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PuzzlePanelSprites\numberTiles.png">
+      <Name>numberTiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
