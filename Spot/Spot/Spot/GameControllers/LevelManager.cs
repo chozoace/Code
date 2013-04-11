@@ -38,7 +38,8 @@ namespace Spot
         int currentPanel;
 
         string levelOne = "Content/XML/Level1.1.xml";
-        string levelTwo = "Content/XML/Prototype2.xml";
+        string levelTwo = "Content/XML/Level2.xml";
+        string levelThree = "Content/XML/Level3.xml";
         string currentLevel;
 
         bool clearLists = false;
@@ -187,7 +188,12 @@ namespace Spot
                 if (levelState == LevelState.Restarting)
                     Initialize(levelOne);
                 else if (levelState == LevelState.NextLevel)
-                    Initialize(levelTwo);
+                {
+                    if (currentLevel == levelOne)
+                        Initialize(levelTwo);
+                    else if (currentLevel == levelTwo)
+                        Initialize(levelThree);
+                }
                 camera.X = player.BoundingBox.X - 288;
                 camera.Y = player.BoundingBox.Y - 208;
             }
