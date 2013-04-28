@@ -32,11 +32,13 @@ namespace Spot
             weapons.Load(xmlFile);
             
             int counter = 0;
+            myNode = weapons.FirstChild;
+
             while (counter <= weaponLocation)
             {
                 if (counter == 0)
                 {
-                    myNode = weapons.FirstChild;
+                    myNode = myNode.FirstChild;
                 }
                 else
                 {
