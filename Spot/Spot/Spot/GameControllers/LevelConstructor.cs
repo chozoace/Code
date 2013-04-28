@@ -19,9 +19,14 @@ namespace Spot
 {
     class LevelConstructor
     {
-        string levelOne = "Content/XML/Level1.1.xml";
+        string levelOne = "Content/XML/Level1.xml";
         string levelTwo = "Content/XML/Level2.xml";
         string levelThree = "Content/XML/Level3.xml";
+        string levelFour = "Content/XML/Level4.xml";
+        string weapons1 = "Content/XML/weapons1.xml";
+        string weapons2 = "Content/XML/weapons2.xml";
+        string weapons3 = "Content/XML/weapons3.xml";
+        string weapons4 = "Content/XML/weapons4.xml";
         List<Wall> walls = new List<Wall>();
         static LevelConstructor instance;
         Vector2 camera = new Vector2(0, 0);
@@ -85,12 +90,19 @@ namespace Spot
                     gidList.Add(int.Parse(xNode.Attributes.GetNamedItem("gid").Value));
                 }
 
-                if(level == levelOne)
+                if (level == levelOne)
+                {
                     tileLoadLevel1();
+                }
                 else if (level == levelTwo)
                     tileLoadLevel2();
                 else if (level == levelThree)
                     tileLoadLevel3();
+                else if (level == levelFour)
+                {
+                    Debug.WriteLine("loadlvl4");
+                    tileLoadLevel1();
+                }
             }
             else if (levelType == "puzzle")
             {
@@ -109,6 +121,7 @@ namespace Spot
             Enemy enemy;
             Sprite theObject;
             int currentPanel = 1;
+            int currentWeapon = 0;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -165,9 +178,10 @@ namespace Spot
                             break;
                         case 10:
                             //weapon
-                            //theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
-                            //walls.Add(theWall);
-                            //LevelManager.Instance().addToSpriteList(theWall);
+                            Debug.WriteLine("weapon");
+                            theObject = new Weapon(currentWeapon, weapons1, destX, destY);
+                            currentWeapon++;
+                            LevelManager.Instance().addToSpriteList(theObject);
                             break;
                         case 11:
                             //bookcase trigger
@@ -184,8 +198,11 @@ namespace Spot
                     }
                 }
             }
+            Debug.WriteLine("before player");
             LevelManager.Instance().player = new Player(new Vector2(playerXpos, playerYpos));
             LevelManager.Instance().addToSpriteList(LevelManager.Instance().player);
+            Debug.WriteLine("after player");
+            Debug.WriteLine(LevelManager.Instance().player.position);
         }
 
         public void tileLoadPuzzlePanel(int cPanel)
@@ -301,6 +318,7 @@ namespace Spot
             Enemy enemy;
             Sprite theObject;
             int currentPanel = 1;
+            int currentWeapon = 0;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -311,35 +329,89 @@ namespace Spot
 
                     switch (getTileAt(spriteforX, spriteForY))
                     {
-                        case 1:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2, "Wall");
+                        case 1://grass
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/Level2Assets/greenTile", "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
-                        case 2:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1, "Wall");
+                        case 2://dirt
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/Level2Assets/dirtTile", "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 3:
-                            playerXpos = destX;
-                            playerYpos = destY;
-                            break;
-                        case 4:
-                            theObject = new PuzzlePanelObject(new Vector2(destX, destY), currentPanel);
-                            LevelManager.Instance().addToSpriteList(theObject);
-                            currentPanel++;
-                            break;
-                        case 5:
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Door");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
-                        case 6:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/TestPuzzleBlock", "NextLevel");
+                        case 4:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "NextLevel");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
+                        case 7://tree
+                            theObject = new Sprite("LevelObjects/Level2Assets/tree", destX, destY);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 16:
+                            playerXpos = destX;
+                            playerYpos = destY;
+                            break;
+                        case 17://puzzlepanel
+                            theObject = new PuzzlePanelObject(new Vector2(destX, destY), currentPanel);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            currentPanel++;
+                            break;
+                        case 31://17: dirt2
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/Level2Assets/dirtTile2", "Wall");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 32://31: second grass
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/Level2Assets/greenTile2", "Wall");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 46://46: weapon
+                            theObject = new Weapon(currentWeapon, weapons1, destX, destY);
+                            currentWeapon++;
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 47://47: enemy
+                            enemy = new MeleeEnemy(new Vector2(destX, destY));
+                            LevelManager.Instance().addToEnemyList(enemy);
+                            LevelManager.Instance().addToSpriteList(enemy);
+                            break;
+                        case 62://62: health
+                            theObject = new HealthPickUp(new Vector2(destX, destY));
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 63: // wood
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/Level2Assets/woodTile", "Wall");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 106://106: Bench
+                            theObject = new Sprite("LevelObjects/Level2Assets/bench", destX, destY - 32);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 110://110: swingset
+                            theObject = new Sprite("LevelObjects/Level2Assets/swing", destX, destY - 32);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 116://116: tree 2
+                            theObject = new Sprite("LevelObjects/Level2Assets/tree2", destX, destY - 32);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 121: //146: trash
+                            theObject = new Sprite("LevelObjects/Level2Assets/trashcan", destX, destY);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 123://148: bush
+                            theObject = new Sprite("LevelObjects/Level2Assets/bush", destX, destY);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                            
                     }
                 }
             }
@@ -353,6 +425,7 @@ namespace Spot
             Enemy enemy;
             Sprite theObject;
             int currentPanel = 1;
+            int currentWeapon = 0;
 
             for (int spriteforX = 0; spriteforX < mapWidth; spriteforX++)
             {
@@ -364,35 +437,53 @@ namespace Spot
                     switch (getTileAt(spriteforX, spriteForY))
                     {
                         case 1:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 2, "Wall");
-                            walls.Add(theWall);
-                            LevelManager.Instance().addToSpriteList(theWall);
-                            break;
                         case 2:
-                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, 1, "Wall");
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/stoneTile", "Wall");
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
-                        case 3:
+                        case 10:
+                            theObject = new Weapon(currentWeapon, weapons3, destX, destY);
+                            currentWeapon++;
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            break;
+                        case 11:
                             playerXpos = destX;
                             playerYpos = destY;
                             break;
-                        case 4:
-                            //theObject = new PuzzlePanelObject(new Vector2(destX, destY), currentPanel);
-                            //LevelManager.Instance().addToSpriteList(theObject);
-                            //currentPanel++;
-                            break;
-                        case 5:
+                        case 13:
                             theWall = new CrackedFloor(new Vector2(destX, destY));
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
-                        //case 6:
-                            //weapon
-                        //    theWall = new FallingBookCase(new Vector2(destX, destY));
-                        //    walls.Add(theWall);
-                        //    LevelManager.Instance().addToSpriteList(theWall);
-                        //    break;
+                        case 15://only orange
+                        //case 16:
+                            //enemy = new MeleeEnemy(new Vector2(destX, destY));
+                            //LevelManager.Instance().addToEnemyList(enemy);
+                            //LevelManager.Instance().addToSpriteList(enemy);
+                            break;
+                        case 19:
+                            theObject = new PuzzlePanelObject(new Vector2(destX, destY), currentPanel);
+                            LevelManager.Instance().addToSpriteList(theObject);
+                            currentPanel++;
+                            break;
+                        case 20:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/NumOne", "Door");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break; 
+                        case 21:
+                            theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/bricktile", "NextLevel");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
                     }
                 }
             }

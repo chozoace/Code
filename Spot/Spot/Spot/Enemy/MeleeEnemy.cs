@@ -43,7 +43,7 @@ namespace Spot
             fallspeed = 10;
             attackRange = 40;
             attackSpeed = 1000;
-            health = 100;
+            health = 1000;
             width = 64;
             height = 64;
             gravity = .5f;

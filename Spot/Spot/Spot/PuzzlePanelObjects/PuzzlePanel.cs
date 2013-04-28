@@ -17,8 +17,8 @@ namespace Spot
 {
     class PuzzlePanel : Sprite
     {
-        string puzzlePanelLevelOne = "Content/XML/PuzzlePanel1.xml";
-        string panelString;
+        string puzzlePanelLevelOne = "Content/XML/Panel1-1.xml";
+        public string panelString;
         List<Sprite> spriteList = new List<Sprite>();
         public List<OpenPuzzleSlot> holeList = new List<OpenPuzzleSlot>();
         KeyboardState myKeyState, previousKeyState;
@@ -55,7 +55,7 @@ namespace Spot
 
         public void loadPanelXML(int currentPanel)
         {
-            LevelManager.Instance().level.XmlLoad(puzzlePanelLevelOne, "puzzle", currentPanel);
+            LevelManager.Instance().level.XmlLoad(panelString, "puzzle", currentPanel);
             addToSpriteList(cursor);
         }
 
@@ -146,7 +146,7 @@ namespace Spot
             }
             if (blockNum == 8)
             {
-                Debug.WriteLine("diagLR " + diagLeftRight + " diagRL " + diagRightLeft + " row " + centRow + " column " + centColumn);
+               // Debug.WriteLine("diagLR " + diagLeftRight + " diagRL " + diagRightLeft + " row " + centRow + " column " + centColumn);
             }
         }
         

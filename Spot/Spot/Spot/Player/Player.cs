@@ -59,6 +59,9 @@ namespace Spot
         public bool canAttack = true;
         bool canJpress = true;
         public bool canKpress = true;
+        int damage = 1000;
+        int attackSpeed;
+        int attackReach = 30;
         //////////
         //Puzzle Check variables
         //////////
@@ -108,10 +111,6 @@ namespace Spot
             runLeftAnim = "Player/HeroWalkLeft";
             lightRight = "Player/HeroAttackRight";
             lightLeft = "Player/HeroAttackLeft";
-            //midRight = "robo_running";
-            //midLeft = "robo_running_left";
-            //heavyRight = "Player/HeroHeavyRight";
-            //heavyLeft = "Player/HeroHeavyLeft";
             hurtLeft = "Player/HeroLeftHurt";
             hurtRight = "Player/HeroRightHurt";
             jumpLeft = "Player/HeroJumpLeft";
@@ -253,6 +252,161 @@ namespace Spot
             }
         }
 
+        public void weaponPickUp(Weapon theWeapon)
+        {
+            damage = theWeapon.damage;
+            attackSpeed = theWeapon.speed;
+            attackReach = theWeapon.range;
+
+            switch (theWeapon.weaponName)
+            {
+                case "ChinSaw":
+                    idleAnim = "Player/Chin/HeroIdleRight";
+                    idleLeftAnim = "Player/Chin/HeroIdleLeft";
+                    runAnim = "Player/Chin/HeroWalkRight";
+                    runLeftAnim = "Player/Chin/HeroWalkLeft";
+                    lightRight = "Player/Chin/HeroAttackRight";
+                    lightLeft = "Player/Chin/HeroAttackLeft";
+                    hurtLeft = "Player/Chin/HeroLeftHurt";
+                    hurtRight = "Player/Chin/HeroRightHurt";
+                    jumpLeft = "Player/Chin/HeroJumpLeft";
+                    jumpRight = "Player/Chin/HeroJumpRight";
+                    break;
+                case "CalligraphyBrush":
+                    idleAnim = "Player/CalligraphyBrush/HeroIdleRight";
+                    idleLeftAnim = "Player/CalligraphyBrush/HeroIdleLeft";
+                    runAnim = "Player/CalligraphyBrush/HeroWalkRight";
+                    runLeftAnim = "Player/CalligraphyBrush/HeroWalkLeft";
+                    lightRight = "Player/CalligraphyBrush/HeroAttackRight";
+                    lightLeft = "Player/CalligraphyBrush/HeroAttackLeft";
+                    hurtLeft = "Player/CalligraphyBrush/HeroLeftHurt";
+                    hurtRight = "Player/CalligraphyBrush/HeroRightHurt";
+                    jumpLeft = "Player/CalligraphyBrush/HeroJumpLeft";
+                    jumpRight = "Player/CalligraphyBrush/HeroJumpRight";
+                    break;
+                case "FantasyBlade":
+                    idleAnim = "Player/FantasyBlade/HeroIdleRight";
+                    idleLeftAnim = "Player/FantasyBlade/HeroIdleLeft";
+                    runAnim = "Player/FantasyBlade/HeroWalkRight";
+                    runLeftAnim = "Player/FantasyBlade/HeroWalkLeft";
+                    lightRight = "Player/FantasyBlade/HeroAttackRight";
+                    lightLeft = "Player/FantasyBlade/HeroAttackLeft";
+                    hurtLeft = "Player/FantasyBlade/HeroLeftHurt";
+                    hurtRight = "Player/FantasyBlade/HeroRightHurt";
+                    jumpLeft = "Player/FantasyBlade/HeroJumpLeft";
+                    jumpRight = "Player/FantasyBlade/HeroJumpRight";
+                    break;
+                case "FluteSword":
+                    idleAnim = "Player/FluteSword/HeroIdleRight";
+                    idleLeftAnim = "Player/FluteSword/HeroIdleLeft";
+                    runAnim = "Player/FluteSword/HeroWalkRight";
+                    runLeftAnim = "Player/FluteSword/HeroWalkLeft";
+                    lightRight = "Player/FluteSword/HeroAttackRight";
+                    lightLeft = "Player/FluteSword/HeroAttackLeft";
+                    hurtLeft = "Player/FluteSword/HeroLeftHurt";
+                    hurtRight = "Player/FluteSword/HeroRightHurt";
+                    jumpLeft = "Player/FluteSword/HeroJumpLeft";
+                    jumpRight = "Player/FluteSword/HeroJumpRight";
+                    break;
+                case "PaintWand":
+                    idleAnim = "Player/PaintWand/HeroIdleRight";
+                    idleLeftAnim = "Player/PaintWand/HeroIdleLeft";
+                    runAnim = "Player/PaintWand/HeroWalkRight";
+                    runLeftAnim = "Player/PaintWand/HeroWalkLeft";
+                    lightRight = "Player/PaintWand/HeroAttackRight";
+                    lightLeft = "Player/PaintWand/HeroAttackLeft";
+                    hurtLeft = "Player/PaintWand/HeroLeftHurt";
+                    hurtRight = "Player/PaintWand/HeroRightHurt";
+                    jumpLeft = "Player/PaintWand/HeroJumpLeft";
+                    jumpRight = "Player/PaintWand/HeroJumpRight";
+                    break;
+                case "SpikeSabre":
+                    idleAnim = "Player/SpikeSabre/HeroIdleRight";
+                    idleLeftAnim = "Player/SpikeSabre/HeroIdleLeft";
+                    runAnim = "Player/SpikeSabre/HeroWalkRight";
+                    runLeftAnim = "Player/SpikeSabre/HeroWalkLeft";
+                    lightRight = "Player/SpikeSabre/HeroAttackRight";
+                    lightLeft = "Player/SpikeSabre/HeroAttackLeft";
+                    hurtLeft = "Player/SpikeSabre/HeroLeftHurt";
+                    hurtRight = "Player/SpikeSabre/HeroRightHurt";
+                    jumpLeft = "Player/SpikeSabre/HeroJumpLeft";
+                    jumpRight = "Player/SpikeSabre/HeroJumpRight";
+                    break;
+                case "ToyntonHammer":
+                    idleAnim = "Player/ToyntonHammer/HeroIdleRight";
+                    idleLeftAnim = "Player/ToyntonHammer/HeroIdleLeft";
+                    runAnim = "Player/ToyntonHammer/HeroWalkRight";
+                    runLeftAnim = "Player/ToyntonHammer/HeroWalkLeft";
+                    lightRight = "Player/ToyntonHammer/HeroAttackRight";
+                    lightLeft = "Player/ToyntonHammer/HeroAttackLeft";
+                    hurtLeft = "Player/ToyntonHammer/HeroLeftHurt";
+                    hurtRight = "Player/ToyntonHammer/HeroRightHurt";
+                    jumpLeft = "Player/ToyntonHammer/HeroJumpLeft";
+                    jumpRight = "Player/ToyntonHammer/HeroJumpRight";
+                    break;
+                case "Tripod":
+                    idleAnim = "Player/Tripod/HeroIdleRight";
+                    idleLeftAnim = "Player/Tripod/HeroIdleLeft";
+                    runAnim = "Player/Tripod/HeroWalkRight";
+                    runLeftAnim = "Player/Tripod/HeroWalkLeft";
+                    lightRight = "Player/Tripod/HeroAttackRight";
+                    lightLeft = "Player/Tripod/HeroAttackLeft";
+                    hurtLeft = "Player/Tripod/HeroLeftHurt";
+                    hurtRight = "Player/Tripod/HeroRightHurt";
+                    jumpLeft = "Player/Tripod/HeroJumpLeft";
+                    jumpRight = "Player/Tripod/HeroJumpRight";
+                    break;
+                case "MayaSword":
+                    idleAnim = "Player/MayaSword/HeroIdleRight";
+                    idleLeftAnim = "Player/MayaSword/HeroIdleLeft";
+                    runAnim = "Player/MayaSword/HeroWalkRight";
+                    runLeftAnim = "Player/MayaSword/HeroWalkLeft";
+                    lightRight = "Player/MayaSword/HeroAttackRight";
+                    lightLeft = "Player/MayaSword/HeroAttackLeft";
+                    hurtLeft = "Player/MayaSword/HeroLeftHurt";
+                    hurtRight = "Player/MayaSword/HeroRightHurt";
+                    jumpLeft = "Player/MayaSword/HeroJumpLeft";
+                    jumpRight = "Player/MayaSword/HeroJumpRight";
+                    break;
+                case "Parasol":
+                    idleAnim = "Player/Parasol/HeroIdleRight";
+                    idleLeftAnim = "Player/Parasol/HeroIdleLeft";
+                    runAnim = "Player/Parasol/HeroWalkRight";
+                    runLeftAnim = "Player/Parasol/HeroWalkLeft";
+                    lightRight = "Player/Parasol/HeroAttackRight";
+                    lightLeft = "Player/Parasol/HeroAttackLeft";
+                    hurtLeft = "Player/Parasol/HeroLeftHurt";
+                    hurtRight = "Player/Parasol/HeroRightHurt";
+                    jumpLeft = "Player/Parasol/HeroJumpLeft";
+                    jumpRight = "Player/Parasol/HeroJumpRight";
+                    break;
+                case "ScissorHands":
+                    idleAnim = "Player/ScissorHands/HeroIdleRight";
+                    idleLeftAnim = "Player/ScissorHands/HeroIdleLeft";
+                    runAnim = "Player/ScissorHands/HeroWalkRight";
+                    runLeftAnim = "Player/ScissorHands/HeroWalkLeft";
+                    lightRight = "Player/ScissorHands/HeroAttackRight";
+                    lightLeft = "Player/ScissorHands/HeroAttackLeft";
+                    hurtLeft = "Player/ScissorHands/HeroLeftHurt";
+                    hurtRight = "Player/ScissorHands/HeroRightHurt";
+                    jumpLeft = "Player/ScissorHands/HeroJumpLeft";
+                    jumpRight = "Player/ScissorHands/HeroJumpRight";
+                    break;
+                case "SlingoSlammer":
+                    idleAnim = "Player/SlingoSlammer/HeroIdleRight";
+                    idleLeftAnim = "Player/SlingoSlammer/HeroIdleLeft";
+                    runAnim = "Player/SlingoSlammer/HeroWalkRight";
+                    runLeftAnim = "Player/SlingoSlammer/HeroWalkLeft";
+                    lightRight = "Player/SlingoSlammer/HeroAttackRight";
+                    lightLeft = "Player/SlingoSlammer/HeroAttackLeft";
+                    hurtLeft = "Player/SlingoSlammer/HeroLeftHurt";
+                    hurtRight = "Player/SlingoSlammer/HeroRightHurt";
+                    jumpLeft = "Player/SlingoSlammer/HeroJumpLeft";
+                    jumpRight = "Player/SlingoSlammer/HeroJumpRight";
+                    break;
+            }
+        }
+
         public void lockPlayerControls()
         {
             if (!controlsLocked)
@@ -332,6 +486,11 @@ namespace Spot
                             LevelManager.Instance().startPuzzle(5);
                         }
                     }
+                }
+                if (keyState.IsKeyDown(Keys.O) == true && previousKeyState.IsKeyDown(Keys.O) == false)
+                {
+                    if(LevelManager.Instance().currentLevel != "Content/XML/Level4.xml")
+                        LevelManager.Instance().nextLevel();
                 }
 
             }
@@ -631,7 +790,7 @@ namespace Spot
 
         public void attack()
         {
-            lAttack = new LightAttack((int)(position.X), (int)(position.Y), Game1.Instance().getContent(), facing);
+            lAttack = new LightAttack((int)(position.X), (int)(position.Y), Game1.Instance().getContent(), facing, damage, attackSpeed, attackReach);
         }
 
         public void attacksToNull()

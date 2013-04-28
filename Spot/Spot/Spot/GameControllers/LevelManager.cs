@@ -37,10 +37,11 @@ namespace Spot
         public PuzzlePanel panelFive;
         int currentPanel;
 
-        string levelOne = "Content/XML/Level1.1.xml";
+        string levelOne = "Content/XML/Level1.xml";
         string levelTwo = "Content/XML/Level2.xml";
         string levelThree = "Content/XML/Level3.xml";
-        string currentLevel;
+        string levelFour = "Content/XML/Level4.xml";
+        public string currentLevel;
 
         bool clearLists = false;
         List<Wall> listWalls = new List<Wall>();
@@ -53,7 +54,11 @@ namespace Spot
         bool paused = false;
         public static LevelManager instance;
 
-        Sprite background = new Sprite("Backgrounds/newBack");
+        Sprite background = new Sprite();
+        string level1tex = "Backgrounds/level1";
+        string level2tex = "Backgrounds/level2";
+        string level3tex = "Backgrounds/level3";
+        string level4tex = "Backgrounds/level4";
         Vector2 backgroundCamera = new Vector2(0, 0);
 
         Texture2D blackScreen;
@@ -83,11 +88,43 @@ namespace Spot
 
             if (currentLevel == levelOne)
             {
-                panelOne = new PuzzlePanel(1, "");
-                panelTwo = new PuzzlePanel(2, "");
-                panelThree = new PuzzlePanel(3, "");
-                panelFour = new PuzzlePanel(4, "");
-                panelFive = new PuzzlePanel(5, "");
+                background.texture = lmContent.Load<Texture2D>(level1tex);
+
+                panelOne = new PuzzlePanel(1, "Content/XML/Level1Puzzles/Panel1-1.xml");
+                panelTwo = new PuzzlePanel(2, "Content/XML/Level1Puzzles/Panel1-2.xml");
+                panelThree = new PuzzlePanel(3, "Content/XML/Level1Puzzles/Panel1-3.xml");
+                panelFour = new PuzzlePanel(4, "Content/XML/Level1Puzzles/Panel1-4.xml");
+                panelFive = new PuzzlePanel(5, "Content/XML/Level1Puzzles/Panel1-5.xml");
+            }
+            else if (currentLevel == levelTwo)
+            {
+                panelOne.panelString = "Content/XML/Level2Puzzles/Panel2-1.xml";
+                panelTwo.panelString = "Content/XML/Level2Puzzles/Panel2-2.xml";
+                panelThree.panelString = "Content/XML/Level2Puzzles/Panel2-3.xml";
+                panelFour.panelString = "Content/XML/Level2Puzzles/Panel2-4.xml";
+                panelFive.panelString = "Content/XML/Level2Puzzles/Panel2-5.xml";
+
+                background.texture = lmContent.Load<Texture2D>(level2tex);
+            }
+            else if (currentLevel == levelThree)
+            {
+                panelOne.panelString = "Content/XML/Level3Puzzles/Panel3-1.xml";
+                panelTwo.panelString = "Content/XML/Level3Puzzles/Panel3-2.xml";
+                panelThree.panelString = "Content/XML/Level3Puzzles/Panel3-3.xml";
+                panelFour.panelString = "Content/XML/Level3Puzzles/Panel3-4.xml";
+                panelFive.panelString = "Content/XML/Level3Puzzles/Panel3-5.xml";
+
+                background.texture = lmContent.Load<Texture2D>(level3tex);
+            }
+            else if (currentLevel == levelFour)
+            {
+                panelOne.panelString = "Content/XML/Level4Puzzles/Panel4-1.xml";
+                panelTwo.panelString = "Content/XML/Level4Puzzles/Panel4-2.xml";
+                panelThree.panelString = "Content/XML/Level4Puzzles/Panel4-3.xml";
+                panelFour.panelString = "Content/XML/Level4Puzzles/Panel4-4.xml";
+                panelFive.panelString = "Content/XML/Level4Puzzles/Panel4-5.xml";
+
+                background.texture = lmContent.Load<Texture2D>(level4tex);
             }
 
             LoadContent();
@@ -193,6 +230,8 @@ namespace Spot
                         Initialize(levelTwo);
                     else if (currentLevel == levelTwo)
                         Initialize(levelThree);
+                    else if (currentLevel == levelThree)
+                        Initialize(levelFour);
                 }
                 camera.X = player.BoundingBox.X - 288;
                 camera.Y = player.BoundingBox.Y - 208;

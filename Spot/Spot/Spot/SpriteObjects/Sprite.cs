@@ -26,7 +26,7 @@ namespace Spot
         protected int height;
         public Vector2 position;
         protected Vector2 previousPosition;
-        protected Texture2D texture;
+        public Texture2D texture;
         protected List<Wall> wallList;
         public bool isEnemy = false;
         public virtual Rectangle BoundingBox { get { return new Rectangle((int)position.X, (int)position.Y, width, height); } }
@@ -42,12 +42,15 @@ namespace Spot
             mySpriteBatch = Game1.Instance().getSpriteBatch();
         }
 
-        public Sprite(String tex)
+        public Sprite(String tex, float xpos = 0, float ypos = 0)
         {
+            position = new Vector2(xpos, ypos);
             myContent = Game1.Instance().getContent();
             mySpriteBatch = Game1.Instance().getSpriteBatch();
 
             texture = myContent.Load<Texture2D>(tex);
+            width = texture.Width;
+            height = texture.Height;
         }
 
         public virtual void Update()

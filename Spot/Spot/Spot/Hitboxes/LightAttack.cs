@@ -16,7 +16,7 @@ namespace Spot
 {
     class LightAttack : Hitbox
     {
-        public LightAttack(int x, int y, ContentManager content, int facing)
+        public LightAttack(int x, int y, ContentManager content, int facing, int newDamage, int newAttackSpeed, int newAttackReach)
         {
             visible = false;
             isEnemyAttack = false;
@@ -43,10 +43,10 @@ namespace Spot
                 position.X = x + Xdisposition;
                 position.Y = y + Ydisposition;
             }
-            width = 30;
+            width = newAttackReach;
             height = 10;
             texture = content.Load<Texture2D>("LevelObjects/Block2");
-            damage = 100;
+            damage = newDamage;
 
             //begin animation
 
