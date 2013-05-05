@@ -1,4 +1,7 @@
 <weapons>
   <ChinSaw name="ChinSaw" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
-  <SlingoSlammer name="ChinSaw" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <SlingoSlammer name="SlingoSlammer" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <SlingoSlammer name="SlingoSlammer" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <SlingoSlammer name="SlingoSlammer" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <SlingoSlammer name="SlingoSlammer" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
 </weapons>

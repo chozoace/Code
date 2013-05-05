@@ -24,11 +24,13 @@ namespace Spot
             Gameplay,
             MainMenu,
             Pause,
+            GameOver
         }
         public GameState gameState = GameState.MainMenu;//should be main menu
 
         LevelManager levelManager;
         MainMenu mainMenu;
+        GameOverScreen gameOverScreen;
         static Game1 instance;
         //bool singletonEnforcer = false;
 
@@ -60,6 +62,7 @@ namespace Spot
         {
             IsMouseVisible = true;
             mainMenu = new MainMenu();
+            gameOverScreen = new GameOverScreen();
             levelManager = new LevelManager(Content, spriteBatch);
 
 
@@ -96,9 +99,9 @@ namespace Spot
             {
                 mainMenu.Update();
             }
-            else if (gameState == GameState.Pause)
+            else if (gameState == GameState.GameOver)
             {
-
+                gameOverScreen.Update();
             }
 
 
@@ -117,6 +120,12 @@ namespace Spot
         public SpriteBatch getSpriteBatch()
         {
             return spriteBatch;
+        }
+
+        public void gameOver()
+        {
+            gameState = GameState.GameOver;
+            gameOverScreen.visible = true;
         }
 
         protected override void Draw(GameTime gameTime)
@@ -159,6 +168,10 @@ namespace Spot
                 else if (gameState == GameState.MainMenu)
                 {
                     mainMenu.Draw(spriteBatch);
+                }
+                else if (gameState == GameState.GameOver)
+                {
+                    gameOverScreen.Draw(spriteBatch);
                 }
 
                 spriteBatch.End();

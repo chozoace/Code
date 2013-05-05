@@ -450,6 +450,7 @@ namespace Spot
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;
                         case 10:
+                            Debug.WriteLine("MADE WEAPON" + " x " + spriteforX + " y " + spriteForY);
                             theObject = new Weapon(currentWeapon, weapons3, destX, destY);
                             currentWeapon++;
                             LevelManager.Instance().addToSpriteList(theObject);
@@ -481,6 +482,11 @@ namespace Spot
                             break; 
                         case 21:
                             theWall = new Wall(new Vector2(destX, destY), tileWidth, tileHeight, "LevelObjects/bricktile", "NextLevel");
+                            walls.Add(theWall);
+                            LevelManager.Instance().addToSpriteList(theWall);
+                            break;
+                        case 22:
+                            theWall = new DeathBlock(new Vector2(destX, destY), tileWidth, tileHeight, 0);
                             walls.Add(theWall);
                             LevelManager.Instance().addToSpriteList(theWall);
                             break;

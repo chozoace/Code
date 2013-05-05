@@ -1,4 +1,12 @@
 <weapons>
   <ChinSaw name="ChinSaw" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
-  <SlingoSlammer name="ChinSaw" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
-</weapons>
+  <SlingoSlammer name="SlingoSlammer" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <Tripod name="Tripod" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <FantasyBlade name="FantasyBlade" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <Spikesabre name="Spikesabre" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <MayaBlade name="MayaBlade" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <FluteSword name="FluteSword" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <ScissorHands name="ScissorHands" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <PaintWand name="PaintWand" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  <CalligraphyBrush name="CalligraphyBrush" damage="1000" attackSpeed="4" weaponType="Saw" range="30" />
+  </weapons>

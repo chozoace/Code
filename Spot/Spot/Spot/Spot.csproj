@@ -132,6 +132,7 @@
     <Compile Include="LevelObjects\FallingBookCase.cs" />
     <Compile Include="LevelObjects\HealthPickUp.cs" />
     <Compile Include="LevelObjects\Weapon.cs" />
+    <Compile Include="Menus\GameOverScreen.cs" />
     <Compile Include="PuzzlePanelObjects\OpenPuzzleSlot.cs" />
     <Compile Include="LevelObjects\PopUpEnemyTrigger.cs" />
     <Compile Include="Player\HUD.cs" />

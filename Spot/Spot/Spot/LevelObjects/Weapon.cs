@@ -22,6 +22,7 @@ namespace Spot
         public string weaponType;
         public int range;
         string myTex;
+        static int DebugCounter = 1;
 
         XmlDocument weapons;
         XmlNode myNode;
@@ -29,8 +30,8 @@ namespace Spot
         public Weapon(int weaponLocation, string xmlFile, float xpos, float ypos)
         {
             weapons = new XmlDocument();
-            weapons.Load(xmlFile);
-            
+            weapons.Load(xmlFile);   
+
             int counter = 0;
             myNode = weapons.FirstChild;
 
@@ -52,6 +53,9 @@ namespace Spot
             range = int.Parse(myNode.Attributes.GetNamedItem("range").Value);
             weaponName = myNode.Attributes.GetNamedItem("name").Value;
             weaponType = myNode.Attributes.GetNamedItem("weaponType").Value;
+
+            Debug.WriteLine("Num weapons: " + DebugCounter + " name " + weaponName);
+            DebugCounter++;
 
             myTex = "WeaponPickups/" + weaponName;
             texture = Game1.Instance().Content.Load<Texture2D>(myTex);

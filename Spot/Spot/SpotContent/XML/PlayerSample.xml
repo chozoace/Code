@@ -1,1 +1,1 @@
-﻿<playerStats health= "50" height= "64" width= "64" maxSpeed= "8" accelRate= "0.8" decelRate= "1.8" jumpSpeedLimit= "10" jumpSpeed= "-19" fallSpeed= "10" gravity="1"/>
+<playerStats health= "50" height= "64" width= "64" maxSpeed= "5" accelRate= "0.8" decelRate= "1.8" jumpSpeedLimit= "8" jumpSpeed= "-17" fallSpeed= "10" gravity="1"/>

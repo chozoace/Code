@@ -1,12 +1,20 @@
 
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="PuzzleSet" tilewidth="32" tileheight="32">
-  <image source="../../../../../Sprites/Tiles/PuzzleSet" width="352" height="160"/>
+  <image source="../../../PuzzleSet.png" width="352" height="160"/>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="15">
   <data>
    <tile gid="1"/>
-   <tile gid="2"/>
+   <tile gid="3"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="1"/>
+   <tile gid="4"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -19,14 +27,6 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
-   <tile gid="1"/>
-   <tile gid="1"/>
-   <tile gid="1"/>
-   <tile gid="2"/>
-   <tile gid="1"/>
-   <tile gid="1"/>
-   <tile gid="1"/>
-   <tile gid="1"/>
    <tile gid="18"/>
    <tile gid="19"/>
    <tile gid="20"/>
@@ -126,7 +126,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
-   <tile gid="2"/>
+   <tile gid="11"/>
    <tile gid="29"/>
    <tile gid="30"/>
    <tile gid="31"/>
@@ -142,7 +142,7 @@
    <tile gid="31"/>
    <tile gid="32"/>
    <tile gid="33"/>
-   <tile gid="2"/>
+   <tile gid="11"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -274,7 +274,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
-   <tile gid="2"/>
+   <tile gid="4"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -282,7 +282,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
-   <tile gid="2"/>
+   <tile gid="3"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>

@@ -231,10 +231,15 @@ namespace Spot
                     else if (currentLevel == levelTwo)
                         Initialize(levelThree);
                     else if (currentLevel == levelThree)
-                        Initialize(levelFour);
+                    {
+                        Game1.Instance().gameOver();
+                    }
                 }
-                camera.X = player.BoundingBox.X - 288;
-                camera.Y = player.BoundingBox.Y - 208;
+                if (Game1.Instance().gameState != Game1.GameState.GameOver)
+                {
+                    camera.X = player.BoundingBox.X - 288;
+                    camera.Y = player.BoundingBox.Y - 208;
+                }
             }
         }
 
